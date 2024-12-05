@@ -1,0 +1,18 @@
+/* Slider - Upcoming.jsx, NowPlaying.jsx, CustomMovie.jsx */
+.slick-next:before, .slick-prev:before{
+    color: black;
+}
+
+.slick-slide{
+    padding: 0 10px;
+}
+
+
+/* Animation - Movie.jsx*/
+.anim-scale {
+    transition: transform 0.3s;
+}
+
+.anim-scale:hover {
+    transform: scale(1.1);
+}
