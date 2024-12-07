@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 
 export function Footer() {
   return (
@@ -12,7 +13,7 @@ export function Footer() {
             <h3 className="fw-bold">TICKET HUB</h3>
             <p>
               Best App For Movie Lovers In India! </p>
-              <p>Movie Entertainment
+            <p>Movie Entertainment
               Platform From Cinema To Online Movie Streaming Selections.</p>
           </div>
 
@@ -49,19 +50,19 @@ export function Footer() {
                 </a>
               </li>
               <li className="mb-2">
-                <a href="#" className="text-decoration-none text-white" >
+                <NavLink to="/contactus" className="text-decoration-none text-white">
                   Contact Us
-                </a>
+                </NavLink>
               </li>
               <li className="mb-2">
-                <a href="#" className="text-decoration-none text-white">
-                  Privacy Policy
-                </a>
+                <NavLink to="/return-policy" className="text-decoration-none text-white" >
+                  Return Policy
+                </NavLink>
               </li>
               <li className="mb-2">
-                <a href="#" className="text-decoration-none text-white">
+                <NavLink to="/terms-condition" className="text-decoration-none text-white" >
                   Terms & Conditions
-                </a>
+                </NavLink>
               </li>
             </ul>
           </div>

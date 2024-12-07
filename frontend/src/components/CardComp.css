@@ -1,0 +1,8 @@
+/* Animation */
+.anim-scale {
+    transition: transform 0.3s;
+}
+
+.anim-scale:hover {
+    transform: scale(1.1);
+}

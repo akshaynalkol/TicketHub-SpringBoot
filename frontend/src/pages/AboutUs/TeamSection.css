@@ -1,0 +1,37 @@
+/* Team Section */
+.team-section {
+    background-color: #f9f9f9;
+    padding: 50px 0;
+}
+
+/* Zoom Effect for Cards */
+.team-section .card {
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.team-section .card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Social Media Links for Team */
+.social-links {
+    margin-top: 10px;
+}
+
+.social-links a {
+    margin-right: 10px;
+    display: inline-block;
+}
+
+.social-icon {
+    width: 30px;
+    height: 30px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.social-icon:hover {
+    transform: scale(1.1); /* Zoom effect on hover */
+    opacity: 0.8; /* Slight transparency effect */
+}

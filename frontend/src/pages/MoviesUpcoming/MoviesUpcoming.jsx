@@ -1,19 +1,19 @@
 import React from 'react';
 import CardComp from '../../components/CardComp';
 import Filter from '../../components/Filter';
-import { getNowPlayingMovies } from '../../services/MovieService';
+import { getUpcomingMovies } from '../../services/MovieService';
 
-export default function Movies() {
+export default function MoviesUpcoming() {
     return (
         <>
             <div className='container'>
-                <div className='row'>
+                <div className='row'>       
                     <div className='col-3 d-none d-lg-inline-block'>
                         <Filter />
                     </div>
                     <div className='col-lg-9'>
-                        <CardComp heading1='Movies' heading2='Coming Soon'
-                         getMovies={getNowPlayingMovies} path='/movies-upcoming'/>
+                        <CardComp heading1='Upcoming Movies' heading2='Now Showing' 
+                        getMovies={getUpcomingMovies} path='/movies'/>
                     </div>
                 </div>
             </div>

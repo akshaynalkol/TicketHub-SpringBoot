@@ -1,7 +1,0 @@
-.seat {
-    transition: transform 0.2s;
-  } 
-  
-.seat:hover {
-    transform: scale(1.1);
-} 

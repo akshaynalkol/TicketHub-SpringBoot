@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 // CSS
-import '../pages/Movies/Movies.css';
+import './Filter.css';
 
 const items = [
   {

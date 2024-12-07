@@ -1,20 +1,17 @@
 import React from 'react'
 import Banner from '../../components/Banner'
-import NowPlaying from '../../components/NowPlaying'
-import Upcoming from '../../components/Upcoming'
+import SliderComp from '../../components/SliderComp'
 import Box from '../../components/Box'
-import CustomEvent from '../../components/CustomEvent'
-import SeatBooking from '../../components/SeatBooking'
+import { getCustomEvents, getNowPlayingMovies, getUpcomingMovies } from '../../services/MovieService'
 
 export default function Home() {
     return (
         <>
             <Banner />
-            <Upcoming />
-            <NowPlaying />
+            <SliderComp heading="Upcoming" getMovies={getUpcomingMovies} show={true}/>
+            <SliderComp heading="Now Playing" getMovies={getNowPlayingMovies} />
             <Box />
-            <CustomEvent />
-            <SeatBooking />
+            <SliderComp heading="Outdoor Events" getMovies={getCustomEvents} />  
         </>
     )
 }
