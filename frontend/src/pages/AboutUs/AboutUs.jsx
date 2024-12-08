@@ -3,10 +3,9 @@ import TeamSection from './TeamSection';
 
 const AboutUs = () => {
     return (
-        <section className="about-us" id="about">
+        <>
             <div className="container my-5">
                 <div className="row gy-4">
-
                     <div className="col-md-6">
                         <img
                             src="/images/tickethub.gif"
@@ -19,7 +18,7 @@ const AboutUs = () => {
                             className="img-fluid rounded shadow"
                         />
                     </div>
-                    
+
                     <div className="col-md-6">
                         <h2><strong>TicketHUB :</strong><h3> Endless entertainment anytime anywhere </h3> </h2>
                         <hr></hr>
@@ -61,7 +60,7 @@ const AboutUs = () => {
                 </div>
             </div>
             <TeamSection />
-        </section>
+        </>
     );
 };
 

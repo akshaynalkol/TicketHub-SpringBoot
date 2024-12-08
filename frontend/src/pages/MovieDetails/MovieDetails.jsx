@@ -35,7 +35,7 @@ const MovieDetails = () => {
                     <img src={`https://image.tmdb.org/t/p/original/${data.backdrop_path}`} alt="Movie Poster"
                         className='w-100 object-fit-cover' height={300} />
                 </div>
-                <div className='row'>
+                <div className='row align-items-start'>
                     <div className='col-2 p-5 pt-0'>
                         <img src={`https://image.tmdb.org/t/p/w200/${data.poster_path}`} alt="Movie Poster"
                             className='' style={{ marginTop: '-150px' }} />

@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import profile from '../../assets/profile.png';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { updateUser } from '../../services/UserService';
 
 const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -7,15 +10,17 @@ const formatDate = (dateString) => {
 };
 
 const UserProfilePage = () => {
+    const navigate = useNavigate();
     const [isEditing, setIsEditing] = useState(false);
-    const [userData, setUserData] = useState({
-        name: 'Farah Khan',
-        email: 'farah@gmail.com',
-        phone: '9754646993',
-        gender: 'Female',
-        maritalStatus: 'Unmarried',
-        dateOfBirth: '1997-02-24',
-    });
+    // const [userData, setUserData] = useState({
+    //     name: 'Farah Khan',
+    //     email: 'farah@gmail.com',
+    //     phone: '9754646993',
+    //     gender: 'Female',
+    //     maritalStatus: 'Unmarried',
+    //     dateOfBirth: '1997-02-24',
+    // });
+    const [userData, setUserData] = useState(JSON.parse(sessionStorage.getItem('user_details')));
 
     const [originalData, setOriginalData] = useState({ ...userData });
 
@@ -30,10 +35,21 @@ const UserProfilePage = () => {
         setIsEditing(!isEditing);
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         setIsEditing(false);
         setOriginalData({ ...userData });
+        // console.log(userData);
+
+        try {
+            let res = await updateUser(userData.id, userData);
+            // console.log(res);
+            toast.success(res.data.message);
+            sessionStorage.setItem("user_details", JSON.stringify(userData));
+        } catch (error) {
+            // console.log(error);       
+            toast.error(error.response.data.message);
+        }
     };
 
     const handleCancel = () => {
@@ -44,6 +60,15 @@ const UserProfilePage = () => {
     const handleTabClick = (tab) => {
         setActiveTab(tab);
     };
+
+    const handleLogout = () => {
+        sessionStorage.removeItem('user_details');
+        toast.success("User Logout Successfully!!");
+        setTimeout(() => {
+            navigate('/');
+            window.location.reload();
+        }, 200);
+    }
 
     return (
         <div className="container pt-4">
@@ -61,8 +86,8 @@ const UserProfilePage = () => {
                 </div>
             </div>
 
-            <div className="row flex-grow-1">
-                <div className="col-md-3 bg-light p-4 min-vh-100">
+            <div className="row align-items-start flex-grow-1 h-100">
+                <div className="col-md-3 bg-light p-4 h-100 rounded">
                     <ul className="nav flex-column">
                         <li className="nav-item mb-2">
                             <a
@@ -97,12 +122,14 @@ const UserProfilePage = () => {
                                 <i className="bi bi-credit-card me-2"></i>Saved Cards
                             </a>
                         </li>
-                        <li className="nav-item">
+                        <li className="nav-item mb-3">
                             <a href="#" className="nav-link text-dark">
                                 <i className="bi bi-wallet me-2"></i>Gift Card Balance
                             </a>
                         </li>
+                        <button className='btn btn-danger' onClick={handleLogout}>Logout</button>
                     </ul>
+
                 </div>
 
                 <div className="col-md-9 p-4">
@@ -147,7 +174,7 @@ const UserProfilePage = () => {
                                         </div>
                                         <div className="col-6">
                                             <strong>Date of Birth</strong>
-                                            <p>{formatDate(originalData.dateOfBirth)}</p>
+                                            <p>{formatDate(originalData.dob)}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -194,9 +221,8 @@ const UserProfilePage = () => {
                                                 value={userData.gender}
                                                 onChange={handleInputChange}
                                             >
-                                                <option value="Female">Female</option>
-                                                <option value="Male">Male</option>
-                                                <option value="Other">Other</option>
+                                                <option value="FEMALE">Female</option>
+                                                <option value="MALE">Male</option>
                                             </select>
                                         </div>
                                     </div>
@@ -209,17 +235,17 @@ const UserProfilePage = () => {
                                                 value={userData.maritalStatus}
                                                 onChange={handleInputChange}
                                             >
-                                                <option value="Unmarried">Unmarried</option>
-                                                <option value="Married">Married</option>
+                                                <option value="UNMARRIED">Unmarried</option>
+                                                <option value="MARRIED">Married</option>
                                             </select>
                                         </div>
                                         <div className="col-md-6">
                                             <label className="form-label">Date of Birth</label>
                                             <input
                                                 type="date"
-                                                name="dateOfBirth"
+                                                name="dob"
                                                 className="form-control"
-                                                value={userData.dateOfBirth}
+                                                value={userData.dob}
                                                 onChange={handleInputChange}
                                             />
                                         </div>
@@ -239,7 +265,7 @@ const UserProfilePage = () => {
                         <div className="bg-white p-4 rounded shadow-sm">
                             <h4>No Booking Available</h4>
                             <p>Movie bookings & food orders will appear here</p>
-                            <button className="btn btn-warning">Book</button>
+                            <NavLink to='/' className="btn btn-warning">Book</NavLink>
                         </div>
                     ) : null}
                 </div>

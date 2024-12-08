@@ -1,10 +1,10 @@
 import React from 'react';
-import './ReturnPolicy.css'; 
+import './ReturnPolicy.css';
 
 const ReturnPolicy = () => {
   return (
-    <div className="container">
-      <header className="return-policy-header">
+    <div className="container">  
+      <header className="return-policy-header">   
         <h1>Return & Refund Policy</h1>
       </header>
 
@@ -16,21 +16,21 @@ const ReturnPolicy = () => {
         <section>
           <h2>1. Eligibility for Cancellation</h2>
           <p>
-          Tickets can be canceled up to 2 hours before the showtime.
+            Tickets can be canceled up to 2 hours before the showtime.
           </p>
         </section>
 
         <section>
           <h2>2. Refund Process</h2>
           <p>
-          The full amount of the ticket price will be refunded to the original payment method.
+            The full amount of the ticket price will be refunded to the original payment method.
           </p>
         </section>
 
         <section>
           <h2>3. Technical Issues</h2>
           <p>
-            For technical issues, such as payment errors or incorrect bookings, contact our support team within 24 hours. 
+            For technical issues, such as payment errors or incorrect bookings, contact our support team within 24 hours.
             Our team will investigate and assist you.
           </p>
         </section>

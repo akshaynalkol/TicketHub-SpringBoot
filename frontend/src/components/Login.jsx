@@ -1,28 +1,71 @@
 import React, { useState } from 'react'
-import SignUp from './SignUp';
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
+import SignUp from './SignUp';
+import axios from 'axios';
+import { signInUser } from '../services/UserService';
+
 
 export default function Login() {
     const [showPassword, setShowPassword] = useState(false);
+    const {
+        register,
+        handleSubmit,
+        watch,
+        formState: { errors },
+    } = useForm()
+
+    const onSubmit = async (data) => {
+        const user = data;
+        // console.log(user);
+
+        try {
+            let res = await signInUser(user);
+            // console.log(res);
+            toast.success("User Signin Successfully!!");
+            sessionStorage.setItem("user_details", JSON.stringify(res.data));
+            setTimeout(() => {
+                location.reload();
+            }, 2000);
+        } catch (error) {
+            // console.log(error.response.data.message);
+            toast.error(error.response.data.message);
+            // setTimeout(() => {
+            //     location.reload();
+            // }, 2000);
+        }
+    }
+    // console.log(watch("email")) // watch input value by passing the name of it
 
     return (
         <>
-            <div class="modal" id="loginModal">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-header border-0">
-                            <h5 class="modal-title fw-bold">Login</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" ></button>
+            <div className="modal" id="loginModal">
+                <div className="modal-dialog modal-dialog-centered">
+                    <div className="modal-content">
+                        <div className="modal-header border-0">
+                            <h5 className="modal-title fw-bold">Login</h5>
+                            <button type="button" className="btn-close" data-bs-dismiss="modal" ></button>
                         </div>
-                        <div class="modal-body">
-                            <div class="container">
-                                <form className=''>
-                                    <input type="email" id="uname" class="form-control mb-3" placeholder="Enter E-mail"
-                                        required />
-                                    <div className='input-group mb-4'>
+                        <div className="modal-body">
+                            <div className="container">
+                                <form onSubmit={handleSubmit(onSubmit)}>
+                                    <input type="email" id="uname" className="form-control"
+                                        placeholder="Enter E-mail"
+                                        {...register("email", {
+                                            required: "Email is required",
+                                            pattern: {
+                                                value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                                                message: "Please enter a valid email address",
+                                            },
+                                        })}
+                                    />
+                                    {errors.email && <p className='text-danger'>{errors.email.message}</p>}
+                                    <div className='input-group mt-3'>
                                         <input type={showPassword ? 'text' : 'password'} placeholder='Enter password'
-                                            className='form-control border-end-0' name='password' id='password'
-                                            onChange={(e) => handleOnChange(e)} required />
+                                            className='form-control border-end-0' id='password'
+                                            onChange={(e) => handleOnChange(e)}
+                                            {...register("password", { required: true })} />
                                         <span className='input-group-text cursor-pointer bg-transparent border'
                                             onClick={() => setShowPassword(!showPassword)}>
                                             {
@@ -30,10 +73,11 @@ export default function Login() {
                                             }
                                         </span>
                                     </div>
-                                    <button class="btn btn-outline-danger w-100">Login</button>
+                                    {errors.password && <span className='text-danger'>This field is required</span>}
+                                    <button className="btn btn-outline-danger w-100 mt-4">Login</button>
                                     <p class="small text-center">
                                         Not a member?&nbsp;
-                                        <button class="btn p-0 text-decoration-underline text-primary"
+                                        <button className="btn p-0 text-decoration-underline text-primary"
                                             data-bs-toggle="modal" data-bs-target="#signupModal">SignUp Here</button>
                                     </p>
                                 </form>
@@ -41,7 +85,7 @@ export default function Login() {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div >
             <SignUp />
         </>
     )

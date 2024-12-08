@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import './SeatBooking.css';
 import TermsAndConditionsModel from "../../components/TermsAndConditionsModel";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export default function SeatBooking() {
+    const navigate = useNavigate();
     const rows = 8;
     const cols = 14;
 
@@ -43,6 +46,15 @@ export default function SeatBooking() {
         setSelectedSeats([]);
         alert("Booking Confirmed!");
     };
+
+    useEffect(() => {
+        if (!JSON.parse(sessionStorage.getItem('user_details'))) {
+            navigate('/');
+            setTimeout(() => {
+                toast.error('Login first to book tickets!!');  
+            }, 100);
+        }
+    }, []);
 
     return (
         <>

@@ -25,8 +25,8 @@ export default function Banner() {
         // console.log(res.data.results);
 
         setKey(res.data.results[index].key)
-        console.log(id);
-        console.log(key)
+        // console.log(id);
+        // console.log(key)
     }
 
     useEffect(() => {
@@ -53,7 +53,7 @@ export default function Banner() {
                                             Rating : {Number(val.vote_average).toFixed(1)} &nbsp;|&nbsp;
                                             View : {Number(val.vote_count).toFixed(0)}
                                         </p>
-                                        <button type="button" class="btn btn-light px-5 py-2 fw-bold" data-bs-toggle="modal"
+                                        <button type="button" className="btn btn-light px-5 py-2 fw-bold" data-bs-toggle="modal"
                                             data-bs-target="#staticBackdrop" onClick={() => handlePlay(val.id, index)}>
                                             Play Now
                                         </button>
@@ -75,19 +75,20 @@ export default function Banner() {
 
 
             <div className="modal fade col-9" id="staticBackdrop" >
-                <div class="modal-dialog modal-dialog-centered modal-xl">
+                <div className="modal-dialog modal-dialog-centered modal-xl">
                     <div class="modal-content bg-black">
-                        <div class="modal-header data-bs-dark border-0">
-                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" ></button>
+                        <div className="modal-header data-bs-dark border-0">
+                            <button type="button" className="btn-close btn-close-white"
+                                data-bs-dismiss="modal" ></button>
                         </div>
-                        <div class="modal-body p-0">
+                        <div className="modal-body p-0">
                             <iframe className="w-100" height="500"
                                 src={`https://www.youtube.com/embed/${key}?autoplay=1&mute=1`}
                                 title="YouTube video player"
-                                frameborder="0"
+                                frameBorder="0"
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                referrerpolicy="strict-origin-when-cross-origin"
-                                allowfullscreen></iframe>
+                                referrerPolicy="strict-origin-when-cross-origin"
+                                allowFullScreen></iframe>
                         </div>
                     </div>
                 </div>
