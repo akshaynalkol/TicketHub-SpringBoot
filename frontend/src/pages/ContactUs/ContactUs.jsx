@@ -4,11 +4,10 @@ import { toast } from 'react-toastify';
 export default function ContactUs() {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
-    const [phone, setMPhone] = useState('');
+    const [phone, setPhone] = useState('');  
     const [message, setMessage] = useState('');
 
     const handleSubmit = (e) => {
-        console.log('Akshay');
         e.preventDefault();
 
         const nameRegex = /^[A-Za-z\s]+$/;
@@ -115,7 +114,7 @@ export default function ContactUs() {
                                     id="phone"
                                     placeholder="Enter phone no"
                                     value={phone}
-                                    onChange={(e) => setPhone(e.target.value)}
+                                    onChange={(e) =>setPhone(e.target.value)}
                                     style={{ borderRadius: '5px', fontSize: '1rem' }}
                                 />
                             </div>

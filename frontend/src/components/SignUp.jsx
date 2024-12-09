@@ -1,9 +1,8 @@
-import axios from 'axios';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { toast } from 'react-toastify';
-import { signUpUser } from '../services/UserService';
+import { signUpUser, validateEmail, validatePhoneNo } from '../services/UserService';
 
 export default function SignUp() {
     const [showPassword, setShowPassword] = useState(false);
@@ -23,11 +22,9 @@ export default function SignUp() {
     const checkEmail = async (email) => {
         if (!email) return;
         try {
-            const res = await axios.get(`http://localhost:8080/user/validateEmail`, {
-                params: { email },
-            });
+            const res = await validateEmail(email);
             clearErrors('email');
-            toast.success("Email is available!");
+            //toast.success("Email is available!");
             setEmailChecked(true);
         } catch (err) {
             setError('email', { type: 'manual', message: 'Email is already in use.' });
@@ -38,11 +35,9 @@ export default function SignUp() {
     const checkPhone = async (phone) => {
         if (!phone) return;
         try {
-            const res = await axios.get(`http://localhost:8080/user/validatePhone`, {
-                params: { phone },
-            });
+            const res = await validatePhoneNo(phone);
             clearErrors('phone');
-            toast.success("Phone number is available!");
+            //toast.success("Phone number is available!");
             setPhoneChecked(true);
         } catch (err) {
             setError('phone', { type: 'manual', message: 'Phone number is already in use.' });
@@ -69,7 +64,7 @@ export default function SignUp() {
                 location.reload();
             }, 1000);
         } catch (error) {
-            toast.error(error.response.data.message);
+            toast.error(error.response?.data?.message || "An error occurred");
             setTimeout(() => {
                 location.reload();
             }, 1000);
@@ -149,16 +144,16 @@ export default function SignUp() {
 
                                         <div className='input-group mt-3'>
                                             <input type={showConfirmPassword ? 'text' : 'password'} placeholder='Confirm password'
-                                                className='form-control border-end-0' {...register("confirmPassword", { 
-                                                    required: "This field is required", 
-                                                    validate: value => value === password || "Passwords do not match" 
+                                                className='form-control border-end-0' {...register("confirmPassword", {
+                                                    required: "This field is required",
+                                                    validate: value => value === password || "Passwords do not match"
                                                 })} />
                                             <span className='input-group-text cursor-pointer bg-transparent border'
                                                 onClick={() => setShowConfirmPassword(!showConfirmPassword)}>
                                                 {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
                                             </span>
                                         </div>
-                                        {errors.confirmPassword && <p className='text-danger'>{errors.confirmPassword.message}</p>}
+                                        {errors.confirmPassword && <p className='text-danger mb-0'>{errors.confirmPassword.message}</p>}
 
                                         <button className="btn btn-outline-success w-100 mt-4">Sign Up</button>
                                     </form>

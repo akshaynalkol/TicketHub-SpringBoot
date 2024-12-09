@@ -6,12 +6,15 @@ import { API_KEY, IMAGE_MAX_BASE_URL, IMAGE_MIN_BASE_URL, TRENDING_API_URL } fro
 export default function Banner() {
     const [data, setData] = useState([])
     const [key, setKey] = useState('');
+    const [loading, setLoading] = useState(false);
 
     async function getData() {
+        setLoading(true);
         let res = await axios.get(TRENDING_API_URL)
         // console.log(res)
         // console.log(res.data.results);
 
+        setLoading(false);
         setData(res.data.results);
     }
 
@@ -33,10 +36,14 @@ export default function Banner() {
         handlePlay(912649)
     }, [key]);
 
+    if (loading === true) {
+        return <p className='text-center text-dark py-5'><span className='spinner-border'></span></p>
+    }
 
     return (
         <>
-            <div id="carouselExample" className="carousel slide carousel-fade" data-bs-ride="carousel">
+            <div id="carouselExample" className="carousel slide carousel-fade" data-bs-ride="carousel"
+                data-bs-interval='5000'>
                 <div className="carousel-inner">
                     {
                         data.map((val, index) => {
@@ -83,7 +90,7 @@ export default function Banner() {
                         </div>
                         <div className="modal-body p-0">
                             <iframe className="w-100" height="500"
-                                src={`https://www.youtube.com/embed/${key}?autoplay=1&mute=1`}
+                                src={`https://www.youtube.com/embed/${key}?autoplay=1&mute=0`}
                                 title="YouTube video player"
                                 frameBorder="0"
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"

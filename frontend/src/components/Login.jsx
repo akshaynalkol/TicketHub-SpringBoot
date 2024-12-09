@@ -30,10 +30,10 @@ export default function Login() {
             }, 2000);
         } catch (error) {
             // console.log(error.response.data.message);
-            toast.error(error.response.data.message);
-            // setTimeout(() => {
-            //     location.reload();
-            // }, 2000);
+            toast.error(error.response?.data?.message || "An error occurred");
+            setTimeout(() => {
+                location.reload();
+            }, 2000);
         }
     }
     // console.log(watch("email")) // watch input value by passing the name of it

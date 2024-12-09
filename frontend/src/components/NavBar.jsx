@@ -1,25 +1,33 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { FaRegCircleUser } from "react-icons/fa6";
+import { IoIosSearch } from "react-icons/io";
 import Login from './Login';
+import { ROUTES } from '../constants/RouteConstants';
 
 export default function NavBar() {
     const [user, setUser] = useState(JSON.parse(sessionStorage.getItem('user_details')));
-    
+
     return (
         <>
             <nav className="navbar navbar-expand-lg navbar-light bg-light sticky-top shadow-lg">
                 <div className="container d-flex flex-column">
                     <div className='d-flex w-100'>
-                        <NavLink className="navbar-brand" to='/'>
+                        <NavLink className="navbar-brand" to={ROUTES.HOME}>
                             <h4 className='fw-bold mb-0'>TicketHub</h4>
                         </NavLink>
                         <div className='me-auto ms-sm-5 col-7'>
-                            <input className="form-control me-2" type="search" placeholder="Search..." />
+                            <div className='input-group'>
+                                <span className='input-group-text bg-white fs-5'>
+                                    <IoIosSearch />
+                                </span>
+                                <input className="form-control me-2 border-start-0 ps-0" type="search"
+                                    placeholder="Search for movies, events and many more..." />
+                            </div>
                         </div>
                         {
                             user ?
-                                <NavLink to="/dashboard" className="fw-normal text-dark pe-2">
+                                <NavLink to={ROUTES.DASHBOARD} className="fw-normal text-dark pe-2">
                                     <FaRegCircleUser className='fs-1' />
                                 </NavLink>
                                 :
@@ -35,19 +43,19 @@ export default function NavBar() {
                     <div className="collapse navbar-collapse me-auto mt-3 " id="navbarSupportedContent">
                         <ul className="navbar-nav me-auto">
                             <li className="nav-item">
-                                <NavLink className="nav-link" to="/">Home</NavLink>
+                                <NavLink className="nav-link" to={ROUTES.HOME}>Home</NavLink>
                             </li>
                             <li className="nav-item">
-                                <NavLink className="nav-link" to="/movies">Movie</NavLink>
+                                <NavLink className="nav-link" to={ROUTES.MOVIES}>Movie</NavLink>
                             </li>
                             <li className="nav-item">
-                                <NavLink className="nav-link" to="/events">Event</NavLink>
+                                <NavLink className="nav-link" to={ROUTES.EVENTS}>Event</NavLink>
                             </li>
                             <li className="nav-item">
-                                <NavLink className="nav-link" to="/aboutus">About</NavLink>
+                                <NavLink className="nav-link" to={ROUTES.ABOUTUS}>About</NavLink>
                             </li>
                             <li className="nav-item">
-                                <NavLink className="nav-link" to="/contactus">Contact</NavLink>
+                                <NavLink className="nav-link" to={ROUTES.CONTACTUS}>Contact</NavLink>
                             </li>
                             <li className="nav-item dropdown">
                                 <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
@@ -55,10 +63,10 @@ export default function NavBar() {
                                 </a>
                                 <ul className="dropdown-menu">
                                     <li>
-                                        <NavLink to='/terms-condition' className="dropdown-item" >Terms & Condition</NavLink>
+                                        <NavLink to={ROUTES.TERMS_CONDITION} className="dropdown-item" >Terms & Condition</NavLink>
                                     </li>
                                     <li>
-                                        <NavLink to='/return-policy' className="dropdown-item" >Return Policy</NavLink>
+                                        <NavLink to={ROUTES.RETURN_POLICY} className="dropdown-item" >Return Policy</NavLink>
                                     </li>
                                     <li><a className="dropdown-item" href="#">Page3</a></li>
                                     <li><a className="dropdown-item" href="#">Page4</a></li>

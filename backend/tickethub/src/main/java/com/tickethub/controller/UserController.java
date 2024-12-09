@@ -26,7 +26,7 @@ import com.tickethub.service.UserService;
 public class UserController {
 	@Autowired
 	private UserService userService;
-
+   
 	@PostMapping("/signup")
 	public ResponseEntity<?> addNewUser(@RequestBody UserDTO userDTO) {
 		System.out.println("In addNewUser " + userDTO);

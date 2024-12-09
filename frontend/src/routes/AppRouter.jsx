@@ -14,25 +14,26 @@ import MoviesUpcoming from "../pages/MoviesUpcoming/MoviesUpcoming";
 import TermsAndConditions from "../pages/TermsAndCondition/TermsAndCondition";
 
 import Payment from "../pages/Payment/Payment";
+import { ROUTES } from "../constants/RouteConstants";
 
 
 export function AppRouter() {
     return (
         <Routes>
-            <Route path="/" element={<Main />}>
+            <Route path={ROUTES.HOME} element={<Main />}>
                 <Route index element={<Home />} />
-                <Route path="/movies" element={<Movies />} />
-                <Route path="/movies-upcoming" element={<MoviesUpcoming />} />
-                <Route path="/events" element={<Events />} />
-                <Route path="/events-upcoming" element={<EventsUpcoming />} />
-                <Route path="/aboutus" element={<AboutUs />} />
-                <Route path="/contactus" element={<ContactUs />} />
-                <Route path='/dashboard' element={<UserProfilePage />} />
-                <Route path='/movie_details/:id' element={<MovieDetails />} />
-                <Route path='/seat_booking' element={<SeatBooking />} />
-                <Route path='/terms-condition' element={<TermsAndConditions />} />
-                <Route path='/return-policy' element={<ReturnPolicy />} />
-                <Route path='/payment' element={<Payment />} />
+                <Route path={ROUTES.MOVIES} element={<Movies />} />
+                <Route path={ROUTES.UPCOMING_MOVIES} element={<MoviesUpcoming />} />
+                <Route path={ROUTES.EVENTS} element={<Events />} />
+                <Route path={ROUTES.UPCOMING_EVENTS} element={<EventsUpcoming />} />
+                <Route path={ROUTES.ABOUTUS} element={<AboutUs />} />
+                <Route path={ROUTES.CONTACTUS} element={<ContactUs />} />
+                <Route path={ROUTES.DASHBOARD} element={<UserProfilePage />} />
+                <Route path={`${ROUTES.MOVIE_DETAILS}/:id`} element={<MovieDetails />} />
+                <Route path={ROUTES.SEAT_BOOKING} element={<SeatBooking />} />
+                <Route path={ROUTES.TERMS_CONDITION} element={<TermsAndConditions />} />
+                <Route path={ROUTES.RETURN_POLICY} element={<ReturnPolicy />} />
+                <Route path={ROUTES.PAYMENT} element={<Payment />} />
             </Route>
         </Routes>
     )

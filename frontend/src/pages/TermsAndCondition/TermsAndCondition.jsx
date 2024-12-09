@@ -1,4 +1,5 @@
 import React from "react";
+import { toast } from "react-toastify";
 
 const TermsAndConditions = () => {
   return (
@@ -106,7 +107,7 @@ const TermsAndConditions = () => {
       <div className="d-flex justify-content-between mb-5">
         <button className="btn btn-light border">Cancel</button>
         <button className="btn btn-danger"
-          onClick={() => alert('You Have Successfully Accepted The Terms & Condition!!')}>
+          onClick={() => toast.success('You Have Successfully Accepted The Terms & Condition!!')}>
           Accept</button>        
       </div>
     </div>

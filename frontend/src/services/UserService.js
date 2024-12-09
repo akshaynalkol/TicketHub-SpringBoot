@@ -10,5 +10,17 @@ export function signUpUser(user) {
 }
 
 export function updateUser(id, user) {
-    return axios.put(`${USER_BASE_URL}updateUser/${id}`, user);  
+    return axios.put(`${USER_BASE_URL}updateUser/${id}`, user);
+}
+
+export function validateEmail(email) {
+    return axios.post(`${USER_BASE_URL}validateEmail`, {
+        params: { email },
+    });
+}
+
+export function validatePhoneNo(phone) {
+    return axios.post(`${USER_BASE_URL}validatePhone`, {
+        params: { phone },
+    });    
 }

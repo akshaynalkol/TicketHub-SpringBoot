@@ -1,5 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { ROUTES } from "../constants/RouteConstants";
 
 export function Footer() {
   return (
@@ -9,7 +10,7 @@ export function Footer() {
     >
       <div className="container">
         <div className="row">
-          <div className="col-lg-3 col-md-6 col-sm-12 mb-4">
+          <div className="col-lg-4 col-md-6 col-sm-12 mb-3">
             <h3 className="fw-bold">TICKET HUB</h3>
             <p>
               Best App For Movie Lovers In India! </p>
@@ -17,7 +18,7 @@ export function Footer() {
               Platform From Cinema To Online Movie Streaming Selections.</p>
           </div>
 
-          <div className="col-lg-3 col-md-6 col-sm-6 mb-4">
+          <div className="col-lg-2 col-md-6 col-sm-6 mb-3">
             <ul className="list-unstyled">
               <li className="mb-2">
                 <a href="#" className="text-decoration-none  text-white">
@@ -42,7 +43,7 @@ export function Footer() {
             </ul>
           </div>
 
-          <div className="col-lg-3 col-md-6 col-sm-6 mb-4">
+          <div className="col-lg-3 col-md-6 col-sm-6 mb-3">
             <ul className="list-unstyled">
               <li className="mb-2">
                 <a href="#" className="text-decoration-none text-white">
@@ -50,29 +51,29 @@ export function Footer() {
                 </a>
               </li>
               <li className="mb-2">
-                <NavLink to="/contactus" className="text-decoration-none text-white">
+                <NavLink to={ROUTES.CONTACTUS} className="text-decoration-none text-white">
                   Contact Us
                 </NavLink>
               </li>
               <li className="mb-2">
-                <NavLink to="/return-policy" className="text-decoration-none text-white" >
+                <NavLink to={ROUTES.RETURN_POLICY} className="text-decoration-none text-white" >
                   Return Policy
                 </NavLink>
               </li>
               <li className="mb-2">
-                <NavLink to="/terms-condition" className="text-decoration-none text-white" >
+                <NavLink to={ROUTES.TERMS_CONDITION} className="text-decoration-none text-white" >
                   Terms & Conditions
                 </NavLink>
               </li>
             </ul>
           </div>
 
-          <div className="col-lg-3 col-md-6 col-sm-12 mb-4">
+          <div className="col-lg-3 col-md-6 col-sm-12 mb-3">
             <h5 className="fw-bold">Ticket Hub Support</h5>
             <p>
               Email:{" "}
               <a
-                href="mailto:help@tickethub.com"
+                href="mailto: help@tickethub.com"
                 className="text-decoration-none text-white"
               >
                 help@tickethub.com
