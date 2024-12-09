@@ -5,6 +5,7 @@ import Login from './Login';
 
 export default function NavBar() {
     const [user, setUser] = useState(JSON.parse(sessionStorage.getItem('user_details')));
+    
     return (
         <>
             <nav className="navbar navbar-expand-lg navbar-light bg-light sticky-top shadow-lg">
@@ -63,8 +64,11 @@ export default function NavBar() {
                                     <li><a className="dropdown-item" href="#">Page4</a></li>
                                 </ul>
                             </li>
-                            <button class="btn btn-danger px-5 mt-2 d-lg-none d-inline-block" data-bs-toggle="modal"
-                                data-bs-target="#loginModal">Login</button>
+                            {
+                                !user &&
+                                <button class="btn btn-danger px-5 mt-2 d-lg-none d-inline-block" data-bs-toggle="modal"
+                                    data-bs-target="#loginModal">Login</button>
+                            }
                         </ul>
                     </div>
                 </div>

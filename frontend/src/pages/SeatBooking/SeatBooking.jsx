@@ -9,6 +9,8 @@ export default function SeatBooking() {
     const rows = 8;
     const cols = 14;
 
+    const rowLabels = "ABCDEFGH";
+
     // console.log(new Array(rows)   
     //     .fill()
     //     .map(() => new Array(cols).fill("available")));
@@ -20,26 +22,54 @@ export default function SeatBooking() {
 
     const [selectedSeats, setSelectedSeats] = useState([]);
 
+    // const handleSeatClick = (row, col) => {
+    //     if (seats[row][col] === "available") {
+    //         const newSeats = [...seats];
+    //         newSeats[row][col] = "selected";
+    //         setSeats(newSeats);
+    //         setSelectedSeats([...selectedSeats, `${row}${col}`]);
+    //     } else if (seats[row][col] === "selected") {
+    //         const newSeats = [...seats];
+    //         newSeats[row][col] = "available";
+    //         setSeats(newSeats);
+    //         setSelectedSeats(
+    //             selectedSeats.filter((seat) => seat !== `${row}${col}`)
+    //         );
+    //     }
+    // };
+
     const handleSeatClick = (row, col) => {
         if (seats[row][col] === "available") {
             const newSeats = [...seats];
             newSeats[row][col] = "selected";
             setSeats(newSeats);
-            setSelectedSeats([...selectedSeats, `${row}${col}`]);
+            setSelectedSeats([...selectedSeats, `${rowLabels[row]}${col + 1}`]);
         } else if (seats[row][col] === "selected") {
             const newSeats = [...seats];
             newSeats[row][col] = "available";
             setSeats(newSeats);
             setSelectedSeats(
-                selectedSeats.filter((seat) => seat !== `${row}${col}`)
+                selectedSeats.filter((seat) => seat !== `${rowLabels[row]}${col + 1}`)
             );
         }
     };
 
+    // const confirmBooking = () => {
+    //     const newSeats = [...seats];
+    //     selectedSeats.forEach((seat) => {
+    //         const [row, col] = seat.split("").map(Number);
+    //         newSeats[row][col] = "booked";
+    //     });
+    //     setSeats(newSeats);
+    //     setSelectedSeats([]);
+    //     alert("Booking Confirmed!");
+    // };
+
     const confirmBooking = () => {
         const newSeats = [...seats];
         selectedSeats.forEach((seat) => {
-            const [row, col] = seat.split("").map(Number);
+            const row = rowLabels.indexOf(seat[0]); // Extract row letter
+            const col = parseInt(seat.slice(1), 10) - 1; // Extract column number
             newSeats[row][col] = "booked";
         });
         setSeats(newSeats);
@@ -86,7 +116,7 @@ export default function SeatBooking() {
                                             margin: "2px",
                                             cursor: seat !== "booked" ? "pointer" : "not-allowed",
                                         }}
-                                    >{colIndex + 1}</button>
+                                    >{rowLabels[rowIndex]}{colIndex + 1}</button>
                                 ))}
                             </div>
                         ))}

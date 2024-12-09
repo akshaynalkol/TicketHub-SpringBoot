@@ -21,18 +21,18 @@ export function AppRouter() {
         <Routes>
             <Route path="/" element={<Main />}>
                 <Route index element={<Home />} />
-                <Route path="movies" element={<Movies />} />
-                <Route path="movies-upcoming" element={<MoviesUpcoming />} />
-                <Route path="events" element={<Events />} />
-                <Route path="events-upcoming" element={<EventsUpcoming />} />
-                <Route path="aboutus" element={<AboutUs />} />
-                <Route path="contactus" element={<ContactUs />} />
-                <Route path='dashboard' element={<UserProfilePage />} />
-                <Route path='movie_details/:id' element={<MovieDetails />} />
-                <Route path='seat_booking' element={<SeatBooking />} />
-                <Route path='terms-condition' element={<TermsAndConditions />} />
-                <Route path='return-policy' element={<ReturnPolicy />} />
-                <Route path='payment' element={<Payment />} />
+                <Route path="/movies" element={<Movies />} />
+                <Route path="/movies-upcoming" element={<MoviesUpcoming />} />
+                <Route path="/events" element={<Events />} />
+                <Route path="/events-upcoming" element={<EventsUpcoming />} />
+                <Route path="/aboutus" element={<AboutUs />} />
+                <Route path="/contactus" element={<ContactUs />} />
+                <Route path='/dashboard' element={<UserProfilePage />} />
+                <Route path='/movie_details/:id' element={<MovieDetails />} />
+                <Route path='/seat_booking' element={<SeatBooking />} />
+                <Route path='/terms-condition' element={<TermsAndConditions />} />
+                <Route path='/return-policy' element={<ReturnPolicy />} />
+                <Route path='/payment' element={<Payment />} />
             </Route>
         </Routes>
     )
