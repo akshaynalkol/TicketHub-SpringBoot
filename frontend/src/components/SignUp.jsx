@@ -24,7 +24,7 @@ export default function SignUp() {
         try {
             const res = await validateEmail(email);
             clearErrors('email');
-            //toast.success("Email is available!");
+            toast.success("Email is available!");
             setEmailChecked(true);
         } catch (err) {
             setError('email', { type: 'manual', message: 'Email is already in use.' });
@@ -37,7 +37,7 @@ export default function SignUp() {
         try {
             const res = await validatePhoneNo(phone);
             clearErrors('phone');
-            //toast.success("Phone number is available!");
+            toast.success("Phone number is available!");
             setPhoneChecked(true);
         } catch (err) {
             setError('phone', { type: 'manual', message: 'Phone number is already in use.' });
@@ -60,16 +60,30 @@ export default function SignUp() {
         try {
             let res = await signUpUser(user);
             toast.success(res.data.message);
-            setTimeout(() => {
-                location.reload();
-            }, 1000);
+            closeModel();
+            // setTimeout(() => {
+            //     location.reload();
+            // }, 1000);
         } catch (error) {
             toast.error(error.response?.data?.message || "An error occurred");
-            setTimeout(() => {
-                location.reload();
-            }, 1000);
+            // setTimeout(() => {
+            //     location.reload();
+            // }, 1000);
         }
     };
+
+    function closeModel() {
+        const modalElement = document.getElementById('signupModal');
+
+        // Create a Bootstrap Modal instance
+        const modalInstance = bootstrap.Modal.getInstance(modalElement);
+
+        // Hide the modal
+        modalInstance.hide();
+
+        // Optionally, perform additional actions
+        console.log('Modal closed programmatically');
+    }
 
     const password = watch('password');
     const confirmPassword = watch('confirmPassword');

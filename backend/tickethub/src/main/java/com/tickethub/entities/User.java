@@ -2,6 +2,8 @@ package com.tickethub.entities;
 
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -31,7 +33,7 @@ public class User extends BaseEntity {
 	@Enumerated(EnumType.STRING)
 	private Gender gender;
 	@Enumerated(EnumType.STRING)
-	private MaritalStatus maritalStatus;
+	private MaritalStatus maritalStatus;     
 	@Column(length = 50)
 	private String password;
 }

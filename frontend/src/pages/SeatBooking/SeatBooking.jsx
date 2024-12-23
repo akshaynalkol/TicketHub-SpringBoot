@@ -74,7 +74,7 @@ export default function SeatBooking() {
         });
         setSeats(newSeats);
         setSelectedSeats([]);
-        alert("Booking Confirmed!");
+        toast.success("Booking Confirmed!");
     };
 
     useEffect(() => {

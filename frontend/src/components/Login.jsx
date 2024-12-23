@@ -7,7 +7,7 @@ import axios from 'axios';
 import { signInUser } from '../services/UserService';
 
 
-export default function Login() {
+export default function Login({ setUser, setIsOpen }) {
     const [showPassword, setShowPassword] = useState(false);
     const {
         register,
@@ -25,18 +25,34 @@ export default function Login() {
             // console.log(res);
             toast.success("User Signin Successfully!!");
             sessionStorage.setItem("user_details", JSON.stringify(res.data));
-            setTimeout(() => {
-                location.reload();
-            }, 2000);
+            setUser(res.data);
+            setIsOpen(false);
+            closeModel(); 
+            // setTimeout(() => {
+            //     location.reload();
+            // }, 2000);
         } catch (error) {
-            // console.log(error.response.data.message);
+            // console.log(error);
             toast.error(error.response?.data?.message || "An error occurred");
-            setTimeout(() => {
-                location.reload();
-            }, 2000);
+            // setTimeout(() => {
+            //     location.reload();
+            // }, 2000);
         }
     }
     // console.log(watch("email")) // watch input value by passing the name of it
+
+    function closeModel() {
+        const modalElement = document.getElementById('loginModal');
+  
+        // Create a Bootstrap Modal instance
+        const modalInstance = bootstrap.Modal.getInstance(modalElement);
+      
+        // Hide the modal
+        modalInstance.hide();
+      
+        // Optionally, perform additional actions
+        console.log('Modal closed programmatically');
+    }
 
     return (
         <>

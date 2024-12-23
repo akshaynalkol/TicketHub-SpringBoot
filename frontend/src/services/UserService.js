@@ -14,13 +14,13 @@ export function updateUser(id, user) {
 }
 
 export function validateEmail(email) {
-    return axios.post(`${USER_BASE_URL}validateEmail`, {
+    return axios.get(`${USER_BASE_URL}validateEmail`, {
         params: { email },
     });
 }
 
-export function validatePhoneNo(phone) {
-    return axios.post(`${USER_BASE_URL}validatePhone`, {
+export function validatePhoneNo(phone) {    
+    return axios.get(`${USER_BASE_URL}validatePhone`, {
         params: { phone },
     });    
 }

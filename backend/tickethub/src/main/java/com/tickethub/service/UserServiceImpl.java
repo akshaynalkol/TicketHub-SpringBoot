@@ -28,7 +28,7 @@ public class UserServiceImpl implements UserService {
 	private ModelMapper modelMapper;
 
 	@Override
-	public String addNewUser(UserDTO userDTO) {
+	public String addNewUser(UserDTO userDTO) {      
 		User newUser = modelMapper.map(userDTO, User.class);
 		User persistentUser = userRepository.save(newUser);
 		return "User SignIn Succesfully!!";
@@ -38,13 +38,13 @@ public class UserServiceImpl implements UserService {
 	public UserDTO authenticateUser(UserDTO dto) {
 		Optional<User> optional = userDao.findByEmailAndPassword(dto.getEmail(), dto.getPassword());
 		User user = optional.orElseThrow(() -> new ResourceNotFoundException("Invalid Email & Password!!"));
-		return modelMapper.map(user, UserDTO.class);
+		return modelMapper.map(user, UserDTO.class);  
 	}
 
 	@Override
 	public List<UserDTO> getAllUsers() {
 
-		return userDao.findAll().stream().map(user -> modelMapper.map(user, UserDTO.class))
+		return userDao.findAll().stream().map(user -> modelMapper.map(user, UserDTO.class))  
 				.collect(Collectors.toList());
 	}
 

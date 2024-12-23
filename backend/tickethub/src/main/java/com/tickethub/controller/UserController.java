@@ -56,7 +56,6 @@ public class UserController {
 		System.out.println("in update user details " + userId + " " + user);
 
 		return ResponseEntity.ok(userService.updateUserDetails(userId, user));
-
 	}
 
 	@GetMapping("/validateEmail")

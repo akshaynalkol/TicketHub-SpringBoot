@@ -36,7 +36,8 @@ public class GlobalExceptionHandler {
 	// catch-all equivalent add exception handling methods => catch blocks
 	@ExceptionHandler(Exception.class)
 	public ResponseEntity<?> handleAnyException(Exception e) {
-		System.out.println("in catch-all ");
+		e.printStackTrace();
+		System.out.println("in catch-all "+ e);  
 		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ApiResponse(e.getMessage()));
 	}
 

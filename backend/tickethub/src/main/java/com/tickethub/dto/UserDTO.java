@@ -2,6 +2,7 @@ package com.tickethub.dto;
 
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.tickethub.entities.Gender;
 import com.tickethub.entities.MaritalStatus;
 
@@ -19,5 +20,6 @@ public class UserDTO extends BaseDTO {
 	private LocalDate dob;
 	private Gender gender;
 	private MaritalStatus maritalStatus;
+	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)   
 	private String password;
 }

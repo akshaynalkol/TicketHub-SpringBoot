@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import profile from '../../assets/profile.png';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate, useOutletContext } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { updateUser } from '../../services/UserService';
 
@@ -11,6 +11,7 @@ const formatDate = (dateString) => {
 
 const UserProfilePage = () => {
     const navigate = useNavigate();
+    const { setUser } = useOutletContext();
     const [isEditing, setIsEditing] = useState(false);
     // const [userData, setUserData] = useState({
     //     name: 'Farah Khan',
@@ -63,11 +64,13 @@ const UserProfilePage = () => {
 
     const handleLogout = () => {
         sessionStorage.removeItem('user_details');
+        setUser(null);
+        console.log(sessionStorage.getItem('user_details'));
         toast.success("User Logout Successfully!!");
-        setTimeout(() => {
-            navigate('/');
-            window.location.reload();
-        }, 200);
+        // setTimeout(() => {
+        navigate('/');
+        //     window.location.reload();  
+        // }, 200);
     }
 
     return (

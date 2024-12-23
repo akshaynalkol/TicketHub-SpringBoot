@@ -32,7 +32,7 @@ export default function ContactUs() {
             return;
         }
 
-        toast.success('Your query has been submitted successfully!');
+        toast.success('Your message has been submitted successfully!!');
 
         setName('');
         setEmail('');
