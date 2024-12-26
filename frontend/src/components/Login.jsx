@@ -1,13 +1,14 @@
-import React, { useState } from 'react'
-import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { useForm } from 'react-hook-form';
-import { toast } from 'react-toastify';
+import React from 'react';
+import { useState } from 'react';
 import SignUp from './SignUp';
-import axios from 'axios';
+import { toast } from 'react-toastify';
+import { useForm } from 'react-hook-form';
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { signInUser } from '../services/UserService';
+import { closeModel } from '../constants/Utils';
 
 
-export default function Login({ setUser, setIsOpen }) {
+export default function Login({ setUser }) {
     const [showPassword, setShowPassword] = useState(false);
     const {
         register,
@@ -26,33 +27,14 @@ export default function Login({ setUser, setIsOpen }) {
             toast.success("User Signin Successfully!!");
             sessionStorage.setItem("user_details", JSON.stringify(res.data));
             setUser(res.data);
-            setIsOpen(false);
-            closeModel(); 
-            // setTimeout(() => {
-            //     location.reload();
-            // }, 2000);
+            closeModel();
         } catch (error) {
             // console.log(error);
             toast.error(error.response?.data?.message || "An error occurred");
-            // setTimeout(() => {
-            //     location.reload();
-            // }, 2000);
         }
     }
+    
     // console.log(watch("email")) // watch input value by passing the name of it
-
-    function closeModel() {
-        const modalElement = document.getElementById('loginModal');
-  
-        // Create a Bootstrap Modal instance
-        const modalInstance = bootstrap.Modal.getInstance(modalElement);
-      
-        // Hide the modal
-        modalInstance.hide();
-      
-        // Optionally, perform additional actions
-        console.log('Modal closed programmatically');
-    }
 
     return (
         <>

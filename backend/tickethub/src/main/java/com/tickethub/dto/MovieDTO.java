@@ -21,7 +21,6 @@ public class MovieDTO {
 	private double vote_average;
 	private int vote_count;
 	private String release_date;
-	private String movieStatus;
 	private String backdrop_path;
-	private String poster_path;
+	private String poster_path;	
 }

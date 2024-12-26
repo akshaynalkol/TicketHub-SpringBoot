@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
-import profile from '../../assets/profile.png';
-import { NavLink, useNavigate, useOutletContext } from 'react-router-dom';
+import React from 'react';
+import { useState } from 'react';
 import { toast } from 'react-toastify';
+import profile from '../../assets/profile.png';
 import { updateUser } from '../../services/UserService';
+import { NavLink, useNavigate, useOutletContext } from 'react-router-dom';
 
 const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -22,9 +23,7 @@ const UserProfilePage = () => {
     //     dateOfBirth: '1997-02-24',
     // });
     const [userData, setUserData] = useState(JSON.parse(sessionStorage.getItem('user_details')));
-
     const [originalData, setOriginalData] = useState({ ...userData });
-
     const [activeTab, setActiveTab] = useState('personalDetails');
 
     const handleInputChange = (e) => {
@@ -65,12 +64,9 @@ const UserProfilePage = () => {
     const handleLogout = () => {
         sessionStorage.removeItem('user_details');
         setUser(null);
-        console.log(sessionStorage.getItem('user_details'));
+        // console.log(sessionStorage.getItem('user_details'));
         toast.success("User Logout Successfully!!");
-        // setTimeout(() => {
         navigate('/');
-        //     window.location.reload();  
-        // }, 200);
     }
 
     return (

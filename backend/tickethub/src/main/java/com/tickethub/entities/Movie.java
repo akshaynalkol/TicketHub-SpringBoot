@@ -18,8 +18,9 @@ import lombok.ToString;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString(callSuper = true, exclude = { "movieCast" })
+@ToString(callSuper = true, exclude = { "movieCasts" })
 public class Movie extends BaseEntity {
+	private long movieId;
 	@Column(unique = true)
 	private String title;
 	@Lob
@@ -29,14 +30,14 @@ public class Movie extends BaseEntity {
 	private String release_date;
 	private String backdrop_path;
 	private String poster_path;
-	private String movieStatus;
+	private String status;
 	
-	private long movieId;
-
-//	@OneToMany(mappedBy = "movie")
-//	private List<MovieCast> movieCasts = new ArrayList<>();
+	private String tagline;
+	private int revenue;
+	private int runtime;
+	
+	private String type;
 
 	@OneToOne(cascade = CascadeType.ALL)
 	private MovieCast movieCasts;
-
 }

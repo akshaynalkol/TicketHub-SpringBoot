@@ -3,12 +3,13 @@ import { useForm } from 'react-hook-form';
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { toast } from 'react-toastify';
 import { signUpUser, validateEmail, validatePhoneNo } from '../services/UserService';
+import { closeModel } from '../constants/Utils';
 
 export default function SignUp() {
-    const [showPassword, setShowPassword] = useState(false);
-    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     const [emailChecked, setEmailChecked] = useState(false);
     const [phoneChecked, setPhoneChecked] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
     const {
         register,
@@ -61,32 +62,10 @@ export default function SignUp() {
             let res = await signUpUser(user);
             toast.success(res.data.message);
             closeModel();
-            // setTimeout(() => {
-            //     location.reload();
-            // }, 1000);
         } catch (error) {
             toast.error(error.response?.data?.message || "An error occurred");
-            // setTimeout(() => {
-            //     location.reload();
-            // }, 1000);
         }
     };
-
-    function closeModel() {
-        const modalElement = document.getElementById('signupModal');
-
-        // Create a Bootstrap Modal instance
-        const modalInstance = bootstrap.Modal.getInstance(modalElement);
-
-        // Hide the modal
-        modalInstance.hide();
-
-        // Optionally, perform additional actions
-        console.log('Modal closed programmatically');
-    }
-
-    const password = watch('password');
-    const confirmPassword = watch('confirmPassword');
 
     return (
         <>

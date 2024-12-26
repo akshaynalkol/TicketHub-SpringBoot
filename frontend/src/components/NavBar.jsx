@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { FaRegCircleUser } from "react-icons/fa6";
 import { IoIosSearch } from "react-icons/io";
@@ -6,8 +6,6 @@ import Login from './Login';
 import { ROUTES } from '../constants/RouteConstants';
 
 export default function NavBar({ user, setUser }) {
-    const [isOpen, setIsOpen] = useState(true);
-    // const [user, setUser] = useState(JSON.parse(sessionStorage.getItem('user_details')));
 
     return (
         <>
@@ -33,10 +31,7 @@ export default function NavBar({ user, setUser }) {
                                 </NavLink>
                                 :
                                 <button class="btn btn-danger px-5 border-0 d-none d-lg-inline-block" data-bs-toggle="modal"
-                                    data-bs-target="#loginModal" onClick={() => {
-                                        console.log(isOpen);
-                                        setIsOpen(true)
-                                    }}>Login</button>
+                                    data-bs-target="#loginModal">Login</button>
                         }
                         <button className="navbar-toggler border-0 p-0" data-bs-toggle="collapse"
                             data-bs-target="#navbarSupportedContent" >
@@ -85,7 +80,7 @@ export default function NavBar({ user, setUser }) {
                     </div>
                 </div>
             </nav>
-            {isOpen && <Login setUser={setUser} setIsOpen={setIsOpen} />}
+            <Login setUser={setUser} />
         </>
     )
 }
