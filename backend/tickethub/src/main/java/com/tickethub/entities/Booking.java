@@ -3,6 +3,8 @@ package com.tickethub.entities;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

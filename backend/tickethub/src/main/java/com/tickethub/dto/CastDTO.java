@@ -11,8 +11,8 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class CastDTO {
-	private Long id;
+public class CastDTO extends BaseDTO {
+	private Long castId;
 	private String name;
 	private String profile_path;
 }

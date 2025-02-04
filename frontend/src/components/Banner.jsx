@@ -1,7 +1,8 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { API_KEY, IMAGE_MAX_BASE_URL, IMAGE_MIN_BASE_URL, TRENDING_API_URL } from '../constants/ApiConstants';
+import { API_KEY, IMAGE_MAX_BASE_URL, IMAGE_MIN_BASE_URL } from '../constants/ApiConstants';
+import { getMovies } from '../services/MovieService';
 
 export default function Banner() {
     const [data, setData] = useState([])
@@ -10,12 +11,11 @@ export default function Banner() {
 
     async function getData() {
         setLoading(true);
-        let res = await axios.get(TRENDING_API_URL)
+        let res = await getMovies("Trending");
         // console.log(res)
-        // console.log(res.data.results);
 
         setLoading(false);
-        setData(res.data.results);
+        setData(res.data);
     }
 
     useEffect(() => {
@@ -27,7 +27,7 @@ export default function Banner() {
         // console.log(res);
         // console.log(res.data.results);
 
-        setKey(res.data.results[index].key)
+        setKey(res.data.results[index].key)      
         // console.log(id);
         // console.log(key)
     }

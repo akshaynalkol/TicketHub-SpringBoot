@@ -71,17 +71,21 @@ export default function SeatBooking() {
             const row = rowLabels.indexOf(seat[0]); // Extract row letter
             const col = parseInt(seat.slice(1), 10) - 1; // Extract column number
             newSeats[row][col] = "booked";
+            console.log(row + " " + col);
         });
+        console.log(newSeats);
+        console.log(selectedSeats);
         setSeats(newSeats);
         setSelectedSeats([]);
         toast.success("Booking Confirmed!");
+
     };
 
     useEffect(() => {
         if (!JSON.parse(sessionStorage.getItem('user_details'))) {
             navigate('/');
             setTimeout(() => {
-                toast.error('Login first to book tickets!!');  
+                toast.error('Login first to book tickets!!');
             }, 100);
         }
     }, []);

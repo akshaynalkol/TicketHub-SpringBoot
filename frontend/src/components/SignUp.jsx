@@ -14,11 +14,14 @@ export default function SignUp() {
     const {
         register,
         handleSubmit,
+        reset,
         watch,
         formState: { errors },
         setError,
         clearErrors,
     } = useForm();
+
+    const password = watch("password", ""); // Watch the password field
 
     const checkEmail = async (email) => {
         if (!email) return;
@@ -57,12 +60,16 @@ export default function SignUp() {
         }
 
         const user = data;
+        console.log(user);
 
         try {
             let res = await signUpUser(user);
+            // console.log(res);
+            reset();
             toast.success(res.data.message);
-            closeModel();
+            closeModel("signupModal");
         } catch (error) {
+            console.log(error);
             toast.error(error.response?.data?.message || "An error occurred");
         }
     };
@@ -139,7 +146,10 @@ export default function SignUp() {
                                             <input type={showConfirmPassword ? 'text' : 'password'} placeholder='Confirm password'
                                                 className='form-control border-end-0' {...register("confirmPassword", {
                                                     required: "This field is required",
-                                                    validate: value => value === password || "Passwords do not match"
+                                                    validate: value => {
+                                                        // console.log("Password:", password, "Confirm Password:", value);
+                                                        return value === password || "Passwords do not match";
+                                                    }
                                                 })} />
                                             <span className='input-group-text cursor-pointer bg-transparent border'
                                                 onClick={() => setShowConfirmPassword(!showConfirmPassword)}>
@@ -148,6 +158,7 @@ export default function SignUp() {
                                         </div>
                                         {errors.confirmPassword && <p className='text-danger mb-0'>{errors.confirmPassword.message}</p>}
 
+                                      
                                         <button className="btn btn-outline-success w-100 mt-4">Sign Up</button>
                                     </form>
                                 </div>

@@ -6,16 +6,19 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { NavLink } from 'react-router-dom';
+import { getMovies } from '../../services/MovieService';
 
-export default function SimilarMovie({ id }) {
+export default function SimilarMovie({ id,type }) {
     const [data, setData] = useState([]);
 
     const getData = async () => {
-        const res = await axios.get(`https://api.themoviedb.org/3/movie/${id}/similar?api_key=${API_KEY}&language=en-US&page=1`);
-        console.log(res.data);
-        console.log(res.data.results);
+        // const res = await axios.get(`https://api.themoviedb.org/3/movie/${id}/similar?api_key=${API_KEY}&language=en-US&page=1`);
+        // console.log(res.data);
+        // console.log(res.data.results);
+        const res=await getMovies(type);
+        // console.log(res);
 
-        setData(res.data.results);
+        setData(res.data);
     }
 
     useEffect(() => {
@@ -67,11 +70,11 @@ export default function SimilarMovie({ id }) {
                 <h3 className='fw-bold mb-4'>Similar Movie</h3>
                 <div className='row mb-4 px-lg-5'>
                     <Slider {...setting}>
-                        {
-                            data.map((val, index) => {
+                        {  
+                            data.filter(val=>val.poster_path && val.id!=id).map((val, index) => {
                                 return (
-                                    <NavLink to={`/movie_details/${val.id}`} className="text-decoration-none">
-                                        <div key={index} className='card border-0'>
+                                    <NavLink key={index} to={`/movie_details/${val.id}`} className="text-decoration-none">
+                                        <div className='card border-0'>
                                             <img src={`${IMAGE_MIN_BASE_URL}${val.poster_path}`} className='card-img' />
                                             <div className='card-body p-0 pt-2'>
                                                 <h5 className='card-title text-wrap'>{val.title}</h5>

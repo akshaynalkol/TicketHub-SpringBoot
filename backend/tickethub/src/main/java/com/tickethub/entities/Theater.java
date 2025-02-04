@@ -2,6 +2,8 @@ package com.tickethub.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,4 +19,8 @@ class Theater extends BaseEntity {
 	private String name;
 	@Column(length = 25)
 	private String location;
+
+	@ManyToOne
+	@JoinColumn(name = "theater_Ownerid", nullable = false)
+	private TheaterOwner theaterOwner;
 }

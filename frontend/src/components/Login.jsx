@@ -13,6 +13,7 @@ export default function Login({ setUser }) {
     const {
         register,
         handleSubmit,
+        reset,
         watch,
         formState: { errors },
     } = useForm()
@@ -25,15 +26,16 @@ export default function Login({ setUser }) {
             let res = await signInUser(user);
             // console.log(res);
             toast.success("User Signin Successfully!!");
+            reset();
             sessionStorage.setItem("user_details", JSON.stringify(res.data));
             setUser(res.data);
-            closeModel();
+            closeModel("loginModal");
         } catch (error) {
             // console.log(error);
             toast.error(error.response?.data?.message || "An error occurred");
         }
     }
-    
+
     // console.log(watch("email")) // watch input value by passing the name of it
 
     return (
@@ -73,12 +75,13 @@ export default function Login({ setUser }) {
                                     </div>
                                     {errors.password && <span className='text-danger'>This field is required</span>}
                                     <button className="btn btn-outline-danger w-100 mt-4">Login</button>
-                                    <p class="small text-center">
-                                        Not a member?&nbsp;
-                                        <button className="btn p-0 text-decoration-underline text-primary"
-                                            data-bs-toggle="modal" data-bs-target="#signupModal">SignUp Here</button>
-                                    </p>
+
                                 </form>
+                                <p class="small text-center">
+                                    Not a member?&nbsp;
+                                    <button className="btn p-0 text-decoration-underline text-primary"
+                                        data-bs-toggle="modal" data-bs-target="#signupModal">SignUp Here</button>
+                                </p>
                             </div>
                         </div>
                     </div>

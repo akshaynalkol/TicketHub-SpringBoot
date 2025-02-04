@@ -4,7 +4,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -12,6 +14,8 @@ import lombok.ToString;
 @Table(name = "casts")
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @ToString(callSuper = true)
 public class Cast extends BaseEntity {
 	private long castId;

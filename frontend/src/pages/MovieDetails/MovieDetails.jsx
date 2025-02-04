@@ -5,6 +5,7 @@ import { NavLink, useParams } from 'react-router-dom';
 import MovieCastDetails from './MovieCastDetails';
 import moment from 'moment';
 import SimilarMovie from './SimilarMovie';
+import { getMovieById, getMovies, getMoviesCast } from '../../services/MovieService';
 
 const MovieDetails = () => {
     const { id } = useParams();
@@ -13,7 +14,9 @@ const MovieDetails = () => {
 
     const getData = async () => {
         setLoading(true);
-        const res = await axios.get(`https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}&language=en-US`);
+        // const res = await axios.get(`https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}&language=en-US`);
+        // console.log(res.data);
+        const res=await getMovieById(id);
         console.log(res.data);
 
         setLoading(false);
@@ -60,7 +63,7 @@ const MovieDetails = () => {
                         <MovieCastDetails id={data.id} />
                     </div>
                 </div>
-                <SimilarMovie id={id} />
+                <SimilarMovie id={data.id} type={data.type} />
             </div >
         </>
     )

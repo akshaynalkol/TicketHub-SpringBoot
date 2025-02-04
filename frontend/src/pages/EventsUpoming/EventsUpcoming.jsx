@@ -1,7 +1,7 @@
 import React from 'react';
 import CardComp from '../../components/CardComp';
 import Filter from '../../components/Filter';
-import {getTrendingMovies } from '../../services/MovieService';
+import {getMovies} from '../../services/MovieService';
 
 export default function EventsUpcoming() {
   return (
@@ -13,7 +13,7 @@ export default function EventsUpcoming() {
           </div>
           <div className='col-lg-9'>
             <CardComp heading1='Upcoming Events' heading2='Now Showing'
-              getMovies={getTrendingMovies} path='/events' />
+              getMovies={()=>getMovies("Trending")} path='/events' />
           </div>
         </div>
       </div>

@@ -5,6 +5,7 @@ import java.util.List;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
@@ -27,7 +28,9 @@ public class MovieCast extends BaseEntity {
 //	@Column(length = 25)
 	private String writer;
 
-	@OneToMany(mappedBy = "movieCast",cascade = CascadeType.ALL)
+//	@OneToMany(mappedBy = "movieCast",cascade = CascadeType.ALL)
 //	@JoinColumn(name = "movie_cast_id")
-	private List<Cast> casts = new ArrayList<>();  
-}
+//	private List<Cast> casts; 
+	@OneToMany(mappedBy = "movieCast", cascade = CascadeType.ALL)
+	private List<Cast> casts=new ArrayList<>();
+}   

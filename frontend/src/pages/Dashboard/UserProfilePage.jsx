@@ -47,7 +47,7 @@ const UserProfilePage = () => {
             toast.success(res.data.message);
             sessionStorage.setItem("user_details", JSON.stringify(userData));
         } catch (error) {
-            // console.log(error);       
+            console.log(error);       
             toast.error(error.response?.data?.message || "An error occurred");
         }
     };
@@ -81,12 +81,12 @@ const UserProfilePage = () => {
                 <div className="ms-3">
                     <h4 className="fw-bold">{originalData.name}</h4>
                     <p className="mb-0">{originalData.email}</p>
-                    <p>{originalData.phone}</p>
+                    <p className='mb-0'>{originalData.phone}</p>
                 </div>
             </div>
 
             <div className="row align-items-start flex-grow-1 h-100">
-                <div className="col-md-3 bg-light p-4 h-100 rounded">
+                <div className="col-lg-3 col-md-4 bg-light p-4 h-100 rounded">
                     <ul className="nav flex-column">
                         <li className="nav-item mb-2">
                             <a
@@ -131,7 +131,7 @@ const UserProfilePage = () => {
 
                 </div>
 
-                <div className="col-md-9 p-4">
+                <div className="col-md-8 p-4">
                     {activeTab === 'personalDetails' ? (
                         <div>
                             <div className="d-flex justify-content-between align-items-center mb-4">

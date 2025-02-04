@@ -30,7 +30,7 @@ export default function NavBar({ user, setUser }) {
                                     <FaRegCircleUser className='fs-1' />
                                 </NavLink>
                                 :
-                                <button class="btn btn-danger px-5 border-0 d-none d-lg-inline-block" data-bs-toggle="modal"
+                                <button className="btn btn-danger px-5 border-0 d-none d-lg-inline-block" data-bs-toggle="modal"
                                     data-bs-target="#loginModal">Login</button>
                         }
                         <button className="navbar-toggler border-0 p-0" data-bs-toggle="collapse"

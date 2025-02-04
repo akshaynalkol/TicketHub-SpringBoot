@@ -16,9 +16,8 @@ export default function SliderComp({ heading, getMovies, show }) {
     async function getData() {
         let res = await getMovies();
         // console.log(res.data);
-        // console.log(res.data.results);
 
-        setData(res.data.results);
+        setData(res.data);
     }
 
     useEffect(() => {

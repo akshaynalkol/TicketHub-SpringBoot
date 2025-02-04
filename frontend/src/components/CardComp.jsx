@@ -15,7 +15,7 @@ export default function CardComp({ heading1, heading2, getMovies, path }) {
         let res = await getMovies();
         // console.log(res.data);     
 
-        setData(res.data.results);
+        setData(res.data);
     }
 
     useEffect(() => {
