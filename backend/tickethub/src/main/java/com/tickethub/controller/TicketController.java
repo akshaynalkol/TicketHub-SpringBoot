@@ -9,6 +9,7 @@ import com.tickethub.service.TicketService;
 
 @RestController
 @RequestMapping("/tickets")
+@CrossOrigin(origins = "http://localhost:5173")
 public class TicketController {  
 
     private final TicketService ticketService;

@@ -43,7 +43,7 @@ const MovieDetails = () => {
                         <img src={`https://image.tmdb.org/t/p/w200/${data.poster_path}`} alt="Movie Poster"
                             className='' style={{ marginTop: '-150px' }} />
                         <button className='btn btn-dark mb-1 mt-3' style={{ width: '200px' }}>Play Trailer</button>
-                        <NavLink to='/seat_booking' className='btn btn-danger' style={{ width: '200px' }}>Book Ticket</NavLink>
+                        <NavLink to={`/show_time/${id}`} className='btn btn-danger' style={{ width: '200px' }}>Book Ticket</NavLink>
                     </div>
                     <div className='col-lg-10 px-md-5 py-5 pt-0'>
                         <h2 className='fw-bold mb-0'>{data.title}</h2>

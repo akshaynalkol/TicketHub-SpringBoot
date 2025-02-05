@@ -48,9 +48,6 @@ export default function NavBar({ user, setUser }) {
                                 <NavLink className="nav-link" to={ROUTES.MOVIES}>Movie</NavLink>
                             </li>
                             <li className="nav-item">
-                                <NavLink className="nav-link" to={ROUTES.EVENTS}>Event</NavLink>
-                            </li>
-                            <li className="nav-item">
                                 <NavLink className="nav-link" to={ROUTES.ABOUTUS}>About</NavLink>
                             </li>
                             <li className="nav-item">

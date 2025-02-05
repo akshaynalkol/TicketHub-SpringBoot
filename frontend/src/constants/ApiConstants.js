@@ -13,3 +13,4 @@ export const IMAGE_MAX_BASE_URL ='https://image.tmdb.org/t/p/original';
 // User
 export const USER_BASE_URL='http://localhost:8080/user/'
 export const MOVIE_BASE_URL='http://localhost:8080/movie/'
+export const TICKET_BASE_URL='http://localhost:8080/tickets/'

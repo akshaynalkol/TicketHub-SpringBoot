@@ -61,7 +61,7 @@ export default function Banner() {
                                             View : {Number(val.vote_count).toFixed(0)}
                                         </p>
                                         <button type="button" className="btn btn-light px-5 py-2 fw-bold" data-bs-toggle="modal"
-                                            data-bs-target="#staticBackdrop" onClick={() => handlePlay(val.id, index)}>
+                                            data-bs-target="#staticBackdrop" onClick={() => handlePlay(val.movieId, index)}>
                                             Play Now
                                         </button>
                                     </div>

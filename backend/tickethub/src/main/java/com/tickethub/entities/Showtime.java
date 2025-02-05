@@ -23,7 +23,8 @@ import lombok.ToString;
 public class Showtime extends BaseEntity {
 	private LocalDate date;
 	private LocalTime time;
-	private int availableSeats;
+	private int availableSeats;   
+	private double amount;
 	@ManyToOne
 	@JoinColumn(name = "movieId")
 	private Movie movie;

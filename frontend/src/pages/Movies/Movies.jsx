@@ -12,8 +12,7 @@ export default function Movies() {
                         <Filter />
                     </div>
                     <div className='col-lg-9'>
-                        <CardComp heading1='Movies' heading2='Coming Soon'
-                         getMovies={()=>getMovies("NowPlaying")} path='/movies-upcoming'/>
+                        <CardComp/>
                     </div>
                 </div>
             </div>

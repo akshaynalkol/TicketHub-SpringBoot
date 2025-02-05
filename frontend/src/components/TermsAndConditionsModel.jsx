@@ -2,7 +2,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-const TermsAndConditionsModel = () => {
+const TermsAndConditionsModel = ({bookingId}) => {
   return (
     <div id="terms-condition" className="modal ">
       <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
@@ -112,7 +112,7 @@ const TermsAndConditionsModel = () => {
           </div>
           <div className="modal-footer border d-flex justify-content-between">
             <button className="btn btn-light border" data-bs-dismiss="modal">Cancel</button>
-            <NavLink to='/payment' className="btn btn-danger"
+            <NavLink to={`/payment/${bookingId}`} className="btn btn-danger"
               onClick={() => { setTimeout(() => location.reload(), 100) }}>
               Accept
             </NavLink>

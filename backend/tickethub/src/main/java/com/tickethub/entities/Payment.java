@@ -23,9 +23,8 @@ public class Payment extends BaseEntity {
 	private LocalDate paymentDate;
 	@Column(length = 25)
 	private String paymentMethod;
-	@Column(length = 25)
+	@Column(length = 25)  
 	private String paymentStatus;
-
 	@OneToOne
 	@JoinColumn(name = "bookingId")
 	private Booking booking;

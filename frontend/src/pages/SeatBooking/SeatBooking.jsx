@@ -1,42 +1,32 @@
 import React, { useEffect, useState } from "react";
 import './SeatBooking.css';
 import TermsAndConditionsModel from "../../components/TermsAndConditionsModel";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
+import axios from "axios";
 
 export default function SeatBooking() {
+    const { showTimeId } = useParams();
+    const [bookingId, setBookingId] = useState();
     const navigate = useNavigate();
     const rows = 8;
     const cols = 14;
-
     const rowLabels = "ABCDEFGH";
 
-    // console.log(new Array(rows)   
-    //     .fill()
-    //     .map(() => new Array(cols).fill("available")));
     const [seats, setSeats] = useState(
-        new Array(rows)
-            .fill()
-            .map(() => new Array(cols).fill("available"))
+        new Array(rows).fill().map(() => new Array(cols).fill("available"))
     );
 
     const [selectedSeats, setSelectedSeats] = useState([]);
 
-    // const handleSeatClick = (row, col) => {
-    //     if (seats[row][col] === "available") {
-    //         const newSeats = [...seats];
-    //         newSeats[row][col] = "selected";
-    //         setSeats(newSeats);
-    //         setSelectedSeats([...selectedSeats, `${row}${col}`]);
-    //     } else if (seats[row][col] === "selected") {
-    //         const newSeats = [...seats];
-    //         newSeats[row][col] = "available";
-    //         setSeats(newSeats);
-    //         setSelectedSeats(
-    //             selectedSeats.filter((seat) => seat !== `${row}${col}`)
-    //         );
-    //     }
-    // };
+    useEffect(() => {
+        if (!JSON.parse(sessionStorage.getItem('user_details'))) {
+            navigate('/');
+            setTimeout(() => {
+                toast.error('Login first to book tickets!');
+            }, 100);
+        }
+    }, [navigate]);
 
     const handleSeatClick = (row, col) => {
         if (seats[row][col] === "available") {
@@ -48,52 +38,54 @@ export default function SeatBooking() {
             const newSeats = [...seats];
             newSeats[row][col] = "available";
             setSeats(newSeats);
-            setSelectedSeats(
-                selectedSeats.filter((seat) => seat !== `${rowLabels[row]}${col + 1}`)
-            );
+            setSelectedSeats(selectedSeats.filter(seat => seat !== `${rowLabels[row]}${col + 1}`));
         }
     };
 
-    // const confirmBooking = () => {
-    //     const newSeats = [...seats];
-    //     selectedSeats.forEach((seat) => {
-    //         const [row, col] = seat.split("").map(Number);
-    //         newSeats[row][col] = "booked";
-    //     });
-    //     setSeats(newSeats);
-    //     setSelectedSeats([]);
-    //     alert("Booking Confirmed!");
-    // };
-
-    const confirmBooking = () => {
-        const newSeats = [...seats];
-        selectedSeats.forEach((seat) => {
-            const row = rowLabels.indexOf(seat[0]); // Extract row letter
-            const col = parseInt(seat.slice(1), 10) - 1; // Extract column number
-            newSeats[row][col] = "booked";
-            console.log(row + " " + col);
-        });
-        console.log(newSeats);
-        console.log(selectedSeats);
-        setSeats(newSeats);
-        setSelectedSeats([]);
-        toast.success("Booking Confirmed!");
-
-    };
-
-    useEffect(() => {
-        if (!JSON.parse(sessionStorage.getItem('user_details'))) {
-            navigate('/');
-            setTimeout(() => {
-                toast.error('Login first to book tickets!!');
-            }, 100);
+    const confirmBooking = async () => {
+        if (selectedSeats.length === 0) {
+            toast.warning("No seats selected!");
+            return;
         }
-    }, []);
+        // console.log(selectedSeats);
+
+        const bookingDetails = {
+            bookingDate: new Date(),
+            noOfSeat: selectedSeats.length,
+            showtime: +showTimeId,
+            user: JSON.parse(sessionStorage.getItem('user_details')).id,
+            seatNumbers: selectedSeats // Send seat numbers as an array
+        };
+        // console.log(bookingDetails);
+
+
+        try {
+            const response = await axios.post('http://localhost:8080/bookings/create', bookingDetails);
+
+            toast.success("Booking confirmed successfully!");
+            // console.log('Booking successful:', response.data);
+            setBookingId(response.data);
+
+            // Mark seats as booked
+            const newSeats = [...seats];
+            selectedSeats.forEach(seat => {
+                const row = rowLabels.indexOf(seat[0]);
+                const col = parseInt(seat.slice(1), 10) - 1;
+                newSeats[row][col] = "booked";
+            });
+
+            setSeats(newSeats);
+            setSelectedSeats([]);
+        } catch (error) {
+            console.error('Error during booking:', error);
+            toast.error("Error during booking, please try again.");
+        }
+    };
 
     return (
         <>
             <div className="container">
-                <h2 className="text-center fw-bold my-4">Seat Booking System</h2>
+                <h2 className="text-center fw-bold my-5">Seat Booking System</h2>
                 <div className="row justify-content-center">
                     <div className="col-7 bg-dark text-white text-center p-1 mb-3"
                         style={{ borderBottomLeftRadius: '150px', borderBottomRightRadius: '150px' }}>
@@ -120,7 +112,9 @@ export default function SeatBooking() {
                                             margin: "2px",
                                             cursor: seat !== "booked" ? "pointer" : "not-allowed",
                                         }}
-                                    >{rowLabels[rowIndex]}{colIndex + 1}</button>
+                                    >
+                                        {rowLabels[rowIndex]}{colIndex + 1}
+                                    </button>
                                 ))}
                             </div>
                         ))}
@@ -129,7 +123,7 @@ export default function SeatBooking() {
                 <div className="text-center my-3">
                     <button className="btn btn-success p-3 me-2" disabled></button>Available&nbsp;&nbsp;
                     <button className="btn btn-warning p-3 me-2" disabled></button>Selected&nbsp;&nbsp;
-                    <button className="btn btn-danger p-3 me-2" disabled>  </button>Booked
+                    <button className="btn btn-danger p-3 me-2" disabled></button>Booked
                 </div>
                 <div className="text-center my-4">
                     <button className="btn btn-danger px-5 mt-2" data-bs-toggle="modal"
@@ -138,7 +132,7 @@ export default function SeatBooking() {
                     </button>
                 </div>
             </div>
-            <TermsAndConditionsModel />
+            <TermsAndConditionsModel bookingId={bookingId} />  
         </>
     );
 };

@@ -6,13 +6,15 @@ import { NavLink } from 'react-router-dom';
 // CSS
 import './CardComp.css';
 import { IMAGE_MIN_BASE_URL } from '../constants/ApiConstants';
+import { getMovies } from '../services/MovieService';
 
 
-export default function CardComp({ heading1, heading2, getMovies, path }) {
+export default function CardComp() {
+    const [type, setType] = useState("Trending");
     const [data, setData] = useState([]);
 
     async function getData() {
-        let res = await getMovies();
+        let res = await getMovies(type);
         // console.log(res.data);     
 
         setData(res.data);
@@ -20,18 +22,30 @@ export default function CardComp({ heading1, heading2, getMovies, path }) {
 
     useEffect(() => {
         getData();
-    }, []);
+    }, [type]);
 
     return (
         <>
-            <h2 className='fw-bold my-4'>{heading1}</h2>
-            <div className='row gy-4 mb-5'>
-                <div className='bg-dark border my-4'>
-                    <h4 className='text-white px-sm-4 px-2 py-4 mb-0'>
-                        {heading2}
-                        <NavLink to={path} className='text-danger float-end'>Explore Now &gt;</NavLink>
-                    </h4>
-                </div>
+            <h2 className='fw-bold my-4'>Movies</h2>
+            <div className='mb-4'>
+                <button className='btn btn-danger rounded-pill px-3 me-2'
+                    onClick={() => setType("Popular")} disabled={type === "Popular"}>
+                    Popular
+                </button>
+                <button className='btn btn-danger rounded-pill px-3 me-2'
+                    onClick={() => setType("Trending")} disabled={type === "Trending"}>
+                    Trending
+                </button>
+                <button className='btn btn-danger rounded-pill px-3 me-2'
+                    onClick={() => setType("Upcoming")} disabled={type === "Upcoming"}>
+                    Upcoming
+                </button>
+                <button className='btn btn-danger rounded-pill px-3 me-2'
+                    onClick={() => setType("NowPlaying")} disabled={type === "NowPlaying"}>
+                    Now Playing
+                </button>
+            </div>
+            <div className='row align-items-start gy-4 mb-5'>
                 {
                     data.map((val, index) => {
                         return (

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Beverages from './Beverages';
+import TicketPDF from './TicketPDF';
 
 export default function Payment() {
     const [total, setTotal] = useState(0);
@@ -30,6 +31,9 @@ export default function Payment() {
                     <p>Total Amount to Pay: ₹{total}</p>
                     <button className="btn btn-danger ">Proceed</button>
                 </div>
+
+                <button onClick={() => TicketPDF("12345")}>Download Ticket</button>
+
             </div>
         </>
     )
