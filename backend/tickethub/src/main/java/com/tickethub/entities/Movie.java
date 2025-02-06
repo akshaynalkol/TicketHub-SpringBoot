@@ -31,7 +31,7 @@ public class Movie extends BaseEntity {
 	private String backdrop_path;
 	private String poster_path;
 	private String status;
-	
+	private String category; 
 	private String tagline;
 	private int revenue;
 	private int runtime;

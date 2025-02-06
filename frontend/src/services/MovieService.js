@@ -1,21 +1,5 @@
 import axios from "axios";
-import { EVENTS_API_URL, MOVIE_BASE_URL, NOWPLAYING_API_URL, TRENDING_API_URL, UPCOMING_API_URL } from "../constants/ApiConstants";
-
-// export function getTrendingMovies() {
-//     return axios.get(TRENDING_API_URL);
-// }
-
-// export function getUpcomingMovies() {
-//     return axios.get(UPCOMING_API_URL);   
-// }
-
-// export function getNowPlayingMovies() {
-//     return axios.get(NOWPLAYING_API_URL);
-// }
-
-// export function getCustomEvents() {
-//     return axios.get(EVENTS_API_URL);
-// }
+import { MOVIE_BASE_URL } from "../constants/ApiConstants";
 
 export function getMovies(type) {
     return axios.get(`${MOVIE_BASE_URL}${type}/type`);
@@ -27,4 +11,14 @@ export function getMovieById(id) {
 
 export function getMoviesCast(id) {
     return axios.get(`${MOVIE_BASE_URL}${id}/cast`);
+}
+
+export function getMovieByTitle(title) {
+    return axios.get(`${MOVIE_BASE_URL}search?title=${title}`)
+}
+
+export function getMoviesByFilter(type, status, rating, category) {
+    return axios.get(`${MOVIE_BASE_URL}${type}/filter`, {
+        params: { status, category, rating }
+    });
 }

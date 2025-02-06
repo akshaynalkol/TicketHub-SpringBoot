@@ -25,4 +25,5 @@ public class MovieDTO extends BaseDTO {
 	private int revenue;
 	private int runtime;
 	private String type;
+	private String category; 
 }

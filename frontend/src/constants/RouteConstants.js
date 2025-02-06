@@ -11,5 +11,6 @@ export const ROUTES = Object.freeze({
     SEAT_BOOKING:"/seat_booking",
     TERMS_CONDITION:"/terms-condition",
     RETURN_POLICY:"/return-policy",
-    PAYMENT:"/payment"
+    PAYMENT:"/payment",   
+    SEARCH:"/search"
 });   

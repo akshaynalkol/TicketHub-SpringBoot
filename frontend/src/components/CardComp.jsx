@@ -2,27 +2,27 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 import moment from 'moment';
 import { NavLink } from 'react-router-dom';
+import { IMAGE_MIN_BASE_URL } from '../constants/ApiConstants';
+import { getMoviesByFilter } from '../services/MovieService';
 
 // CSS
 import './CardComp.css';
-import { IMAGE_MIN_BASE_URL } from '../constants/ApiConstants';
-import { getMovies } from '../services/MovieService';
 
 
-export default function CardComp() {
-    const [type, setType] = useState("Trending");
+export default function CardComp({ filters }) {
+    const [type, setType] = useState("Popular");
     const [data, setData] = useState([]);
 
     async function getData() {
-        let res = await getMovies(type);
-        // console.log(res.data);     
+        let res = await getMoviesByFilter(type, filters.status, filters.rating || 0, filters.category);
+        // console.log(res);     
 
         setData(res.data);
     }
 
     useEffect(() => {
         getData();
-    }, [type]);
+    }, [type, filters]);
 
     return (
         <>

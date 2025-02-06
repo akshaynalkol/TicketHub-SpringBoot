@@ -1,87 +1,88 @@
-import React, { useState } from "react";
+import React from "react";
 
-// CSS
-import './Filter.css';
-
-const items = [
-  {
-    title: "Categories",
-    content: [
-      "Comedy Shows",
-      "Workshops",
-      "Music Shows",
-      "Meetups",
-      "Kids",
-      "New Year Parties",
-      "Performances",
-    ],
-  },
-  {
-    title: "More Filters",
-    content: [
-      "Outdoor Events",
-      "Fast Filling",
-      "Must Attend",
-      "Kids Allowed",
-      "Online Streaming",
-      "Dinner",
-      "DJ Party",
-    ],
-  },
-  {
-    title: "Price",
-    content: ["Free", "0 - 500", "501 - 2000", "Above 2000"],
-  },
-  {
-    title: "Date",
-    content: ["Today", "Tomorrow", "This Weekend"],
-  },
-  {
-    title: "Languages",
-    content: [
-      "Hindi",
-      "English",
-      "Marathi",
-      "Tamil",
-      "Bengali",
-      "Kannada",
-      "Malayalam",
-      "Telugu",
-    ],
-  },
-];
-
-const Filter = () => {
-  const [activeIndex, setActiveIndex] = useState(null);
-
-  const toggleAccordion = (index) => {
-    setActiveIndex(activeIndex === index ? null : index);
-  };
+const Filter = ({ filters, setFilters }) => {
 
   return (
     <>
       <h2 className='fw-bold my-4'>Filter</h2>
-      <div className="accordion">
-        {items.map((item, index) => (
-          <div key={index} className="accordion-item">
-            <div
-              className="accordion-title"
-              onClick={() => toggleAccordion(index)}
-            >
-              <h4>{item.title}</h4>
-              <span>{activeIndex === index ? "-" : "+"}</span>
+      <div class="accordion" id="accordionExample">
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+              Categories
+            </button>
+          </h2>
+          <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+              <button className="btn btn-danger w-100 mb-1" disabled={filters.category === "ComedyShows"}
+                onClick={() => setFilters({ ...filters, category: "ComedyShows" })}>
+                Comedy Shows
+              </button>
+              <button className="btn btn-danger w-100 mb-1" disabled={filters.category === "Drama"}
+                onClick={() => setFilters({ ...filters, category: "Drama" })}>
+                Drama
+              </button>
+              <button className="btn btn-danger w-100 mb-1" disabled={filters.category === "Thriller"}
+                onClick={() => setFilters({ ...filters, category: "Thriller" })}>
+                Thriller
+              </button>
+              <button className="btn btn-danger w-100 mb-1" disabled={filters.category === "Action"}
+                onClick={() => setFilters({ ...filters, category: "Action" })}>
+                Action
+              </button>
+              <button className="btn btn-danger w-100" disabled={filters.category === "Romance"}
+                onClick={() => setFilters({ ...filters, category: "Romance" })}>
+                Romance
+              </button>
             </div>
-            {activeIndex === index && (
-              <div className="accordion-content">
-                {item.content.map((option, idx) => (
-                  <button key={idx} className="accordion-option">
-                    {option}
-                  </button>
-                ))}
-              </div>
-            )}
           </div>
-        ))}
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+              Status
+            </button>
+          </h2>
+          <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+              <button className="btn btn-danger w-100 mb-1" disabled={filters.status === "Released"}
+                onClick={() => setFilters({ ...filters, status: "Released" })}>
+                Released
+              </button>
+              <button className="btn btn-danger w-100 mb-1" disabled={filters.status === "PostProduction"}
+                onClick={() => setFilters({ ...filters, status: "PostProduction" })}>
+                Post Production
+              </button>
+              <button className="btn btn-danger w-100 mb-1" disabled={filters.status === "InProdction"}
+                onClick={() => setFilters({ ...filters, status: "InProdction" })}>
+                In Production
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+              Rating
+            </button>
+          </h2>
+          <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+              <button className="btn btn-danger w-100 mb-1" disabled={filters.rating === 8}
+                onClick={() => setFilters({ ...filters, rating: 8 })}>
+                High Rated
+              </button>
+              <button className="btn btn-danger w-100 mb-1" disabled={filters.rating === 7}
+                onClick={() => setFilters({ ...filters, rating: 7 })}>
+                Medium Rated
+              </button>
+              <button className="btn btn-danger w-100 mb-1" disabled={filters.rating === 6}
+                onClick={() => setFilters({ ...filters, rating: 6 })}>
+                Low Rated
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </>
   );

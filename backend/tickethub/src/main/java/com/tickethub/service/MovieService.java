@@ -11,4 +11,8 @@ public interface MovieService {
 	MovieCastDTO getMovieCastByMovieId(long id);
 
 	MovieDTO getMoviesById(long id);
+
+	List<MovieDTO> searchMovies(String title);
+
+	List<MovieDTO> getFilteredMovies(String status, String category, Double rating, String type);
 }

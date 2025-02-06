@@ -14,3 +14,12 @@ export const IMAGE_MAX_BASE_URL ='https://image.tmdb.org/t/p/original';
 export const USER_BASE_URL='http://localhost:8080/user/'
 export const MOVIE_BASE_URL='http://localhost:8080/movie/'
 export const TICKET_BASE_URL='http://localhost:8080/tickets/'
+
+
+
+
+const Google_API_KEY = 'AIzaSyAGr445Tqocn-DGDqs0-2ZvF-IWhUaK9TQ';   
+export const YOUTUBE_SEARCH_API =
+    "http://suggestqueries.google.com/complete/search?client=firefox&ds=yt&q=";
+export const YOUTUBE_SEARCH_VIDEO_API =
+    `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=50&type=video&regionCode=IN&key=${Google_API_KEY}&q=`;

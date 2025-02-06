@@ -13,6 +13,7 @@ import TermsAndConditions from "../pages/TermsAndCondition/TermsAndCondition";
 import Payment from "../pages/Payment/Payment";
 import { ROUTES } from "../constants/RouteConstants";
 import Showtime from "../pages/ShowTime/ShowTime";
+import Search from "../pages/Search/Search";
 
 
 export function AppRouter() {
@@ -30,6 +31,7 @@ export function AppRouter() {
                 <Route path={ROUTES.TERMS_CONDITION} element={<TermsAndConditions />} />
                 <Route path={ROUTES.RETURN_POLICY} element={<ReturnPolicy />} />  
                 <Route path={`${ROUTES.PAYMENT}/:bookingId`} element={<Payment />} />
+                <Route path={ROUTES.SEARCH} element={<Search/>}/>  
             </Route>
         </Routes>
     )

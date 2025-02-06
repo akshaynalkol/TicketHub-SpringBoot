@@ -30,20 +30,26 @@ public class MovieServiceImpl implements MovieService {
 	}
 
 	public MovieCastDTO getMovieCastByMovieId(long id) {
-		return movieRepository.findById(id)
-	            .map(movie -> {
-	                MovieCast movieCast = movie.getMovieCasts();
-	                // Ensure cast is fetched
+		return movieRepository.findById(id).map(movie -> {
+			MovieCast movieCast = movie.getMovieCasts();
+			// Ensure cast is fetched
 //	                movieCast.getCasts().size();  
-	                return modelMapper.map(movieCast, MovieCastDTO.class);
-	            })
-	            .orElse(null);
+			return modelMapper.map(movieCast, MovieCastDTO.class);
+		}).orElse(null);
 	}
 
 	@Override
 	public MovieDTO getMoviesById(long id) {
-	    return movieRepository.findById(id)
-	            .map(movie -> modelMapper.map(movie, MovieDTO.class)) 
-	            .orElse(null);  
+		return movieRepository.findById(id).map(movie -> modelMapper.map(movie, MovieDTO.class)).orElse(null);
+	}
+
+	public List<MovieDTO> searchMovies(String title) {
+		return movieRepository.findByTitleContainingIgnoreCase(title).stream()
+				.map(movie -> modelMapper.map(movie, MovieDTO.class)).collect(Collectors.toList());
+	}
+
+	public List<MovieDTO> getFilteredMovies(String status, String category, Double rating, String type) {
+		return movieRepository.filterMovies(status, category, rating, type).stream()
+				.map(movie -> modelMapper.map(movie, MovieDTO.class)).collect(Collectors.toList());
 	}
 }
