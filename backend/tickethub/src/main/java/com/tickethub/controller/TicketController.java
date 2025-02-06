@@ -5,16 +5,16 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.tickethub.service.TicketService;
+import com.tickethub.service.TicketServiceImpl;
 
 @RestController
 @RequestMapping("/tickets")
 @CrossOrigin(origins = "http://localhost:5173")
 public class TicketController {  
 
-    private final TicketService ticketService;
+    private final TicketServiceImpl ticketService;
 
-    public TicketController(TicketService ticketService) {
+    public TicketController(TicketServiceImpl ticketService) {
         this.ticketService = ticketService;
     }
   

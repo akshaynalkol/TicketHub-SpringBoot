@@ -1,6 +1,5 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import { API_KEY, IMAGE_MIN_BASE_URL } from '../../constants/ApiConstants';
+import { IMAGE_MIN_BASE_URL } from '../../constants/ApiConstants';
 import moment from 'moment';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
@@ -8,14 +7,11 @@ import 'slick-carousel/slick/slick-theme.css';
 import { NavLink } from 'react-router-dom';
 import { getMovies } from '../../services/MovieService';
 
-export default function SimilarMovie({ id,type }) {
+export default function SimilarMovie({ id, type }) {
     const [data, setData] = useState([]);
 
     const getData = async () => {
-        // const res = await axios.get(`https://api.themoviedb.org/3/movie/${id}/similar?api_key=${API_KEY}&language=en-US&page=1`);
-        // console.log(res.data);
-        // console.log(res.data.results);
-        const res=await getMovies(type);
+        const res = await getMovies(type);
         // console.log(res);
 
         setData(res.data);
@@ -70,8 +66,8 @@ export default function SimilarMovie({ id,type }) {
                 <h3 className='fw-bold mb-4'>Similar Movie</h3>
                 <div className='row mb-4 px-lg-5'>
                     <Slider {...setting}>
-                        {  
-                            data.filter(val=>val.poster_path && val.id!=id).map((val, index) => {
+                        {
+                            data.filter(val => val.poster_path && val.id != id).map((val, index) => {
                                 return (
                                     <NavLink key={index} to={`/movie_details/${val.id}`} className="text-decoration-none">
                                         <div className='card border-0'>

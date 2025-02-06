@@ -1,7 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import Profile from '../../assets/profile.png';
-import { API_KEY } from '../../constants/ApiConstants';
 import { getMoviesCast } from '../../services/MovieService';
 
 const MovieCastDetails = ({ id }) => {
@@ -9,9 +6,7 @@ const MovieCastDetails = ({ id }) => {
     const [cast, setCast] = useState([]);
 
     const getData = async () => {
-        // const res = await axios.get(`https://api.themoviedb.org/3/movie/${id}/credits?api_key=${API_KEY}&language=en-US`);
-        // console.log(res.data);
-        const res=await getMoviesCast(id);
+        const res = await getMoviesCast(id);
         // console.log(res);
 
         setData(res.data);

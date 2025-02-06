@@ -9,6 +9,10 @@ export function signUpUser(user) {
     return axios.post(`${USER_BASE_URL}signup`, user);
 }
 
+export function verifyOTP(data){
+    return axios.post(`${USER_BASE_URL}verifyOTP`,data);
+}
+
 export function updateUser(id, user) {
     return axios.put(`${USER_BASE_URL}updateUser/${id}`, user);
 }

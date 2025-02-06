@@ -12,6 +12,9 @@ export default function NavBar({ user, setUser }) {
     const [suggestion, setSuggestion] = useState([]);
     const [showSuggestions, setShowSuggestions] = useState(false);
 
+    console.log(key);
+    
+
     useEffect(() => {
         if (key.length > 0) {
             nav(`search?q=${key}`);
@@ -57,7 +60,10 @@ export default function NavBar({ user, setUser }) {
                                             suggestion?.map((val, index) => {
                                                 return (
                                                     <button className='btn btn-light text-start rounded-0'
-                                                        key={index} onClick={() => { setKey(val); setShowSuggestions(false) }}
+                                                        key={index} onClick={() => {
+                                                            setKey(index)
+                                                            setShowSuggestions(false)
+                                                        }}
                                                     >
                                                         <i className="fa-solid fa-magnifying-glass pe-3"></i>
                                                         {val}
@@ -120,7 +126,7 @@ export default function NavBar({ user, setUser }) {
                     </div>
                 </div>
             </nav>
-            <Login setUser={setUser} />
+            <Login user={user} setUser={setUser} />  
         </>
     )
 }

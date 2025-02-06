@@ -99,6 +99,13 @@
 		    <groupId>org.springframework.boot</groupId>
     		<artifactId>spring-boot-starter-mail</artifactId>
 		</dependency>
+		
+		<!-- send OTP email -->    
+		<dependency>
+			<groupId>org.springframework.session</groupId>
+			<artifactId>spring-session-core</artifactId>
+		</dependency>
+		
 		<dependency>
     		<groupId>com.sun.activation</groupId>
     		<artifactId>jakarta.activation</artifactId>

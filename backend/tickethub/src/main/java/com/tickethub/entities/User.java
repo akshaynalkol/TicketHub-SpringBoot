@@ -25,7 +25,7 @@ import lombok.ToString;
 public class User extends BaseEntity {
 	@Column(length = 25)
 	private String name;
-	@Column(length = 25, unique = true)
+	@Column(length = 30, unique = true)
 	private String email;
 	@Column(length = 25, unique = true)
 	private String phone;
@@ -35,5 +35,6 @@ public class User extends BaseEntity {
 	@Enumerated(EnumType.STRING)
 	private MaritalStatus maritalStatus;     
 	@Column(length = 50)
+	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 	private String password;
 }

@@ -24,7 +24,7 @@ import com.itextpdf.layout.properties.TextAlignment;
 import com.itextpdf.layout.properties.UnitValue;
 
 @Service
-public class TicketService {
+public class TicketServiceImpl {
 
 	public byte[] generateTicketPdf(String name, String event, String date, String seat, String venue, String price) {
 		try {

@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { API_KEY } from '../../constants/ApiConstants';
 import { NavLink, useParams } from 'react-router-dom';
 import MovieCastDetails from './MovieCastDetails';
 import moment from 'moment';
 import SimilarMovie from './SimilarMovie';
-import { getMovieById, getMovies, getMoviesCast } from '../../services/MovieService';
+import { getMovieById } from '../../services/MovieService';
 
 const MovieDetails = () => {
     const { id } = useParams();
@@ -14,10 +12,8 @@ const MovieDetails = () => {
 
     const getData = async () => {
         setLoading(true);
-        // const res = await axios.get(`https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}&language=en-US`);
+        const res = await getMovieById(id);
         // console.log(res.data);
-        const res=await getMovieById(id);
-        console.log(res.data);
 
         setLoading(false);
         setData(res.data);
@@ -35,8 +31,13 @@ const MovieDetails = () => {
         <>
             <div className='container-fluid'>
                 <div className='w-100'>
-                    <img src={`https://image.tmdb.org/t/p/original/${data.backdrop_path}`} alt="Movie Poster"
-                        className='w-100 object-fit-cover' height={300} />
+                    {
+                        data.backdrop_path ?
+                            <img src={`https://image.tmdb.org/t/p/original/${data.backdrop_path}`} alt="Movie Poster"
+                                className='w-100 object-fit-cover' height={300} />
+                            :
+                            <div className='w-100' style={{ height: '180px' }}  ></div>
+                    }
                 </div>
                 <div className='row align-items-start'>
                     <div className='col-2 p-5 pt-0'>
@@ -45,7 +46,7 @@ const MovieDetails = () => {
                         <button className='btn btn-dark mb-1 mt-3' style={{ width: '200px' }}>Play Trailer</button>
                         <NavLink to={`/show_time/${id}`} className='btn btn-danger' style={{ width: '200px' }}>Book Ticket</NavLink>
                     </div>
-                    <div className='col-lg-10 px-md-5 py-5 pt-0'>
+                    <div className='col-xl-10 px-md-5 py-5 pt-0'>
                         <h2 className='fw-bold mb-0'>{data.title}</h2>
                         <p className='mb-2'>{data.tagline}</p>
                         <p className='border-top pt-2 mb-2'>

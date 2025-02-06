@@ -1,6 +1,7 @@
 package com.tickethub.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.tickethub.dto.ApiResponse;
 import com.tickethub.dto.UserDTO;
 import com.tickethub.entities.User;
+import com.tickethub.service.OTPServiceImpl;
 import com.tickethub.service.UserService;
 
 @RestController
@@ -26,6 +28,9 @@ import com.tickethub.service.UserService;
 public class UserController {
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+    private OTPServiceImpl otpService;
    
 	@PostMapping("/signup")
 	public ResponseEntity<?> addNewUser(@RequestBody UserDTO userDTO) {
@@ -35,12 +40,38 @@ public class UserController {
 	}
 
 	@PostMapping("/signin")
-	public ResponseEntity<?> authenticateUser(@RequestBody UserDTO userDTO) {
-		System.out.println("In authenticateUser " + userDTO);
+    public ResponseEntity<?> authenticateUser(@RequestBody UserDTO userDTO) {
+        System.out.println("In authenticateUser " + userDTO);
 
-		UserDTO userDTOResp = userService.authenticateUser(userDTO);
-		return ResponseEntity.ok(userDTOResp);
-	}
+        // Authenticate user with email and password
+        UserDTO user = userService.authenticateUser(userDTO);
+
+        if (user != null) {
+            // If authentication is successful, send OTP
+            otpService.sendOTP(user.getEmail());  // Send OTP to the authenticated email
+            
+            return ResponseEntity.ok(new ApiResponse("OTP sent to your email.", user));  // changes
+
+            //return ResponseEntity.ok(new ApiResponse("OTP sent to your email."));
+        } else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiResponse("Invalid email or password"));
+        }
+    }
+	
+	@PostMapping("/verifyOTP")
+    public ResponseEntity<?> verifyOTP(@RequestBody Map<String, String> request) {
+        String email = request.get("email");
+        String enteredOTP = request.get("otp");
+
+        boolean isVerified = otpService.verifyOTP(email, enteredOTP);
+
+        if (isVerified) {
+            return ResponseEntity.ok(new ApiResponse("Login Successful"));
+        } else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiResponse("Invalid OTP or OTP expired"));
+        }
+    }
+
 
 	@GetMapping("/getAllUsers")
 	public ResponseEntity<?> getAllUsers() {
