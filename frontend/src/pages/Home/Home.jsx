@@ -11,7 +11,7 @@ export default function Home() {
             <SliderComp heading="Upcoming" getMovies={()=>getMovies("Upcoming")} show={true}/>
             <SliderComp heading="Now Playing" getMovies={()=>getMovies("NowPlaying")} />
             <Box />
-            <SliderComp heading="Popular Movies" getMovies={()=>getMovies("Popular")} />  
+            <SliderComp heading="Popular Movies" getMovies={()=>getMovies("Popular")} />     
         </>
     )
 }

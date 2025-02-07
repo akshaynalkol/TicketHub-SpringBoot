@@ -20,10 +20,10 @@ export default function Login({ user, setUser }) {
         formState: { errors },
     } = useForm()
 
-    const onSubmit = async (data) => {
+    const onSubmit = async (user) => {
         if (step === 1) {
             try {
-                let res = await signInUser(data);
+                let res = await signInUser(user);
                 // console.log(res);
                 toast.success(res.data.message);
                 setData(res.data.user);
@@ -36,8 +36,12 @@ export default function Login({ user, setUser }) {
             }
         }
         else {
+            let dataa={
+                email:data.email,
+                otp:user.otp
+            }
             try {
-                let res = await verifyOTP(user);
+                let res = await verifyOTP(dataa);
                 // console.log(res);
                 toast.success(res.data.message);
                 sessionStorage.setItem("user_details", JSON.stringify(data));

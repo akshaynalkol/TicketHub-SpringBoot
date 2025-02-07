@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
+import { sendMessage } from '../../services/ContactService';
 
 export default function ContactUs() {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
-    const [phone, setPhone] = useState('');  
+    const [phone, setPhone] = useState('');
     const [message, setMessage] = useState('');
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         const nameRegex = /^[A-Za-z\s]+$/;
@@ -32,10 +33,26 @@ export default function ContactUs() {
             return;
         }
 
-        toast.success('Your message has been submitted successfully!!');
+        let data = {
+            name,
+            email,
+            phone,
+            message
+        }
+        console.log(data);
+
+        try {
+            let res = await sendMessage(data)
+            console.log(res);
+            toast.success('Your message has been submitted successfully!!');
+        } catch (error) {
+            console.log(error);  
+            toast.error(error.response?.data?.message || "An error occurred");
+        }
 
         setName('');
         setEmail('');
+        setPhone('');
         setMessage('');
     };
 
@@ -114,7 +131,7 @@ export default function ContactUs() {
                                     id="phone"
                                     placeholder="Enter phone no"
                                     value={phone}
-                                    onChange={(e) =>setPhone(e.target.value)}
+                                    onChange={(e) => setPhone(e.target.value)}
                                     style={{ borderRadius: '5px', fontSize: '1rem' }}
                                 />
                             </div>

@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tickethub.entities.EmailDetails;
-import com.tickethub.service.EmailService;
+import com.tickethub.service.EmailService;     
 
 //Annotation
 @RestController
