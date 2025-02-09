@@ -15,9 +15,9 @@ import lombok.ToString;
 @Setter
 @ToString(callSuper = true)
 class Theater extends BaseEntity {
-	@Column(unique = true, length = 25)
+	@Column(unique = true, length = 40)
 	private String name;
-	@Column(length = 25)
+	@Column(length = 40)
 	private String location;
 
 	@ManyToOne

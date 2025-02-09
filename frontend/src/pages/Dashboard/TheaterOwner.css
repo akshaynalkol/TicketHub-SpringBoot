@@ -1,0 +1,30 @@
+/* Theater Owner Dashboard */
+.theater-owner-container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+    background: white;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    text-align: center;
+}
+
+.theater-owner-container h2 {
+    color: #28a745;
+}
+
+/* Theater Owner Actions */
+.owner-actions button {
+    padding: 10px 15px;
+    margin: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    background: #218838;
+    color: white;
+}
+
+.owner-actions button:hover {
+    background: #166f31;
+}

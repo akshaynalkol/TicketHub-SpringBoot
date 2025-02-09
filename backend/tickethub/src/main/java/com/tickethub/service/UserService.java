@@ -21,6 +21,7 @@ public interface UserService {
 
 	boolean checkEmailExists(String email);
 
-	boolean validatePhone(String phone);    
-	
+	boolean validatePhone(String phone);
+
+	ApiResponse deleteUserDetails(Long userId);	
 }

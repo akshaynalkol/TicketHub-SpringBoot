@@ -14,6 +14,7 @@ import Payment from "../pages/Payment/Payment";
 import { ROUTES } from "../constants/RouteConstants";
 import Showtime from "../pages/ShowTime/ShowTime";
 import Search from "../pages/Search/Search";
+import Ticket from "../pages/Ticket/Ticket";
 
 
 export function AppRouter() {
@@ -32,6 +33,7 @@ export function AppRouter() {
                 <Route path={ROUTES.RETURN_POLICY} element={<ReturnPolicy />} />  
                 <Route path={`${ROUTES.PAYMENT}/:bookingId`} element={<Payment />} />
                 <Route path={ROUTES.SEARCH} element={<Search/>}/>  
+                <Route path={`${ROUTES.TICKET}/:bookingId`} element={<Ticket/>}/>   
             </Route>
         </Routes>
     )

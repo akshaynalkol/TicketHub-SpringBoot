@@ -47,7 +47,7 @@ const UserProfilePage = () => {
             toast.success(res.data.message);
             sessionStorage.setItem("user_details", JSON.stringify(userData));
         } catch (error) {
-            console.log(error);       
+            // console.log(error);       
             toast.error(error.response?.data?.message || "An error occurred");
         }
     };
@@ -71,7 +71,7 @@ const UserProfilePage = () => {
 
     return (
         <div className="container pt-4">
-            <div className="bg-light py-4 mb-3 d-flex align-items-center">
+            <div className="bg-light p-4 mb-3 d-flex align-items-center">
                 <img
                     src={profile}
                     alt="Profile"
@@ -131,9 +131,9 @@ const UserProfilePage = () => {
 
                 </div>
 
-                <div className="col-md-8 p-4">
+                <div className="col-lg-9 col-md-8">
                     {activeTab === 'personalDetails' ? (
-                        <div>
+                        <div className='shadow-sm p-4'>
                             <div className="d-flex justify-content-between align-items-center mb-4">
                                 <h2 className="fw-bold">Contact Information</h2>
 
@@ -145,7 +145,7 @@ const UserProfilePage = () => {
                             </div>
 
                             {!isEditing ? (
-                                <div className="bg-white p-4 rounded shadow-sm">
+                                <div className="bg-white rounded">
                                     <div className="row mb-3">
                                         <div className="col-6">
                                             <strong>Full Name</strong>

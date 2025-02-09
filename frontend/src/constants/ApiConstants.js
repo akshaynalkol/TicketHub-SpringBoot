@@ -17,6 +17,9 @@ export const TICKET_BASE_URL='http://localhost:8080/tickets/'
 export const CONTACT_BASE_URL='http://localhost:8080/contact/'
 
 
+export const THEATEROWNER_BASE_URL='http://localhost:8080/theaterowner/'
+export const BOOKING_BASE_URL='http://localhost:8080/bookings/'
+
 
 const Google_API_KEY = 'AIzaSyAGr445Tqocn-DGDqs0-2ZvF-IWhUaK9TQ';   
 export const YOUTUBE_SEARCH_API =

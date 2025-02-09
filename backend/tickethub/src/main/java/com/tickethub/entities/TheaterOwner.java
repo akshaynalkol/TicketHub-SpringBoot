@@ -5,6 +5,8 @@ import java.util.List;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -25,6 +27,9 @@ public class TheaterOwner extends BaseEntity {
 
     @Column(name = "contact_info", nullable = false, unique = true)
     private String contactInfo;
+    
+    @Enumerated(EnumType.STRING)
+	private Role role;
 
     @OneToMany(mappedBy = "theaterOwner", cascade = CascadeType.ALL)
     private List<Theater> theaters;

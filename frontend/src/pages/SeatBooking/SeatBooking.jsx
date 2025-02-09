@@ -62,7 +62,7 @@ export default function SeatBooking() {
         try {
             const response = await axios.post('http://localhost:8080/bookings/create', bookingDetails);
 
-            toast.success("Booking confirmed successfully!");
+            // toast.success("Booking confirmed successfully!");
             // console.log('Booking successful:', response.data);
             setBookingId(response.data);
 

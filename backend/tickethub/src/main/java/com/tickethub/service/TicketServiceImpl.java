@@ -31,7 +31,7 @@ public class TicketServiceImpl {
 			ByteArrayOutputStream baos = new ByteArrayOutputStream();
 			PdfWriter writer = new PdfWriter(baos);
 			PdfDocument pdf = new PdfDocument(writer);
-			Document document = new Document(pdf);
+			Document document = new Document(pdf);                   
 
 			// 🎟 Load Font (iText 7 requires an explicit font)
 			PdfFont boldFont = PdfFontFactory.createFont(com.itextpdf.io.font.constants.StandardFonts.HELVETICA_BOLD);

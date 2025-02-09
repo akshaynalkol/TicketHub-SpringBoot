@@ -17,7 +17,7 @@ public class ShowtimeServiceImpl implements ShowtimeService {
 	@Autowired
 	private ModelMapper modelMapper;
 
-	public List<ShowtimeDTO> getShowtimesByMovie(Long movieId) {
+	public List<ShowtimeDTO> getShowtimesByMovie(Long movieId) {   
 		return showtimeRepository.findByMovieId(movieId).stream()
 				.map(showtime -> modelMapper.map(showtime, ShowtimeDTO.class)).collect(Collectors.toList());
 	}

@@ -12,5 +12,6 @@ export const ROUTES = Object.freeze({
     TERMS_CONDITION:"/terms-condition",
     RETURN_POLICY:"/return-policy",
     PAYMENT:"/payment",   
-    SEARCH:"/search"
+    SEARCH:"/search",
+    TICKET:"/ticket"
 });   

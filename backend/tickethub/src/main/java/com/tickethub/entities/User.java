@@ -31,10 +31,13 @@ public class User extends BaseEntity {
 	private String phone;
 	private LocalDate dob;
 	@Enumerated(EnumType.STRING)
-	private Gender gender;
+	private Gender gender;  
 	@Enumerated(EnumType.STRING)
 	private MaritalStatus maritalStatus;     
 	@Column(length = 50)
 	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 	private String password;
+	
+	@Enumerated(EnumType.STRING)
+	private Role role;    
 }
