@@ -4,9 +4,14 @@ import { useNavigate } from 'react-router-dom';
 import profile from '../../assets/profile.png';
 import { deleteUser, getAllUsers, signUpUser, updateUser } from '../../services/UserService';
 import { deleteTheaterOwner, getAllTheaterOwner } from '../../services/TheaterOwnerService';
-import { deleteBooking, getAllBookings } from '../../services/BookingServce';
+import { deleteBooking, getAllBookings } from '../../services/BookingService';
 
 const AdminDashboard = () => {
+  const [user, setUser] = useState(() => {
+    const storedUser = sessionStorage.getItem('user_details');
+    return storedUser ? JSON.parse(storedUser) : null;
+  });
+
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState('manageUsers');
 
@@ -186,7 +191,7 @@ const AdminDashboard = () => {
 
   const loadAllBooking = async () => {
     let res = await getAllBookings();
-    console.log(res);
+    // console.log(res);
 
     setBookings(res.data);
   }
@@ -199,8 +204,10 @@ const AdminDashboard = () => {
   const handleTabClick = (tab) => setActiveTab(tab);
 
   const handleLogout = () => {
-    sessionStorage.removeItem('admin_details');
-    toast.success("Admin Logged Out Successfully!");
+    sessionStorage.removeItem('user_details');
+    setUser(null);
+    // console.log(sessionStorage.getItem('user_details'));
+    toast.success("Admin Logout Successfully!!");
     navigate('/');
   };
 
@@ -216,7 +223,7 @@ const AdminDashboard = () => {
         />
         <div className="ms-3">
           <h4 className="fw-bold">Admin Panel</h4>
-          <p className="mb-0">admin@tickethub.com</p>
+          <p className="mb-0">{user?.name}</p>
         </div>
       </div>
 
@@ -261,7 +268,7 @@ const AdminDashboard = () => {
           {activeTab === 'manageUsers' && (
             <div className="bg-white p-4 rounded shadow-sm">
               <h2 className='fw-bold mb-4'>Manage Users</h2>
-              <div className="mb-3">
+              {/* <div className="mb-3">
                 <input
                   type="text"
                   name="name"
@@ -305,7 +312,7 @@ const AdminDashboard = () => {
                     Add User
                   </button>
                 )}
-              </div>
+              </div> */}
               <table className="table text-center">
                 <thead>
                   <tr>
@@ -391,7 +398,7 @@ const AdminDashboard = () => {
                     <tr key={owner.id}>
                       <td>{owner.name}</td>
                       <td>{owner.contactInfo}</td>
-                      <td>{owner.theaters.map(val=>val.name).join()}</td>
+                      <td>{owner.theaters.map(val => val.name).join()}</td>
                       <td>
                         {/* <button className="btn btn-primary btn-sm me-2" onClick={() => editOwner(owner)}>
                           Edit
@@ -456,7 +463,7 @@ const AdminDashboard = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {bookings.map((booking) => (
+                  {bookings && bookings?.map((booking) => (
                     <tr key={booking.id}>
                       <td>{booking.user.name}</td>
                       <td>{booking.showtime.movie.title}</td>

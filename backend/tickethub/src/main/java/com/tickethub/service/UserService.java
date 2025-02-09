@@ -3,6 +3,7 @@ package com.tickethub.service;
 import java.util.List;
 
 import com.tickethub.dto.ApiResponse;
+import com.tickethub.dto.LoginRequestDTO;
 import com.tickethub.dto.UserDTO;
 import com.tickethub.entities.User;
 
@@ -12,6 +13,8 @@ public interface UserService {
 	
 	// Add method to signin user
 	UserDTO authenticateUser(UserDTO dto);
+	
+	UserDTO authenticateUser(LoginRequestDTO dto);
 
 	//Add method to get all users
 	List<UserDTO> getAllUsers();

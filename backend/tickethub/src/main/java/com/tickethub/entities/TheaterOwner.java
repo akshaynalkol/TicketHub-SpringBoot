@@ -29,7 +29,10 @@ public class TheaterOwner extends BaseEntity {
     private String contactInfo;
     
     @Enumerated(EnumType.STRING)
-	private Role role;
+	private Role role=Role.THEATER_OWNER;
+    
+    @Column(name = "password", nullable = false)
+	private String password;  
 
     @OneToMany(mappedBy = "theaterOwner", cascade = CascadeType.ALL)
     private List<Theater> theaters;

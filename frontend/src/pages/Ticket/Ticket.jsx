@@ -1,10 +1,24 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import TicketPDF from './TicketPDF';
 
 export default function Ticket() {
     const { bookingId } = useParams();
     const navigate = useNavigate();
+    const [user, setUser] = useState(() => {
+        const storedUser = sessionStorage.getItem('user_details');
+        return storedUser ? JSON.parse(storedUser) : null;
+    });
+
+    useEffect(() => {
+        if (!user) {
+            navigate('/');
+            setTimeout(() => {
+                toast.error('Login first to book tickets!');
+            }, 100);
+        }
+    }, [navigate, user]);
+
 
     return (
         <div className="container text-center my-5">

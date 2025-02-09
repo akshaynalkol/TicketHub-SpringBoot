@@ -15,6 +15,8 @@ import { ROUTES } from "../constants/RouteConstants";
 import Showtime from "../pages/ShowTime/ShowTime";
 import Search from "../pages/Search/Search";
 import Ticket from "../pages/Ticket/Ticket";
+import TheaterOwnerDashboard from "../pages/Dashboard/TheaterOwner";
+import AdminDashboard from "../pages/Dashboard/Admin";
 
 
 export function AppRouter() {
@@ -25,7 +27,9 @@ export function AppRouter() {
                 <Route path={ROUTES.MOVIES} element={<Movies />} />
                 <Route path={ROUTES.ABOUTUS} element={<AboutUs />} />
                 <Route path={ROUTES.CONTACTUS} element={<ContactUs />} />
-                <Route path={ROUTES.DASHBOARD} element={<UserProfilePage />} />
+                <Route path={ROUTES.USE_DASHBOARD} element={<UserProfilePage />} />
+                <Route path={ROUTES.THEATER_OWNER_DASHBOARD} element={<TheaterOwnerDashboard/>}/>
+                <Route path={ROUTES.ADMIN_DASHBOARD} element={<AdminDashboard/>}/>
                 <Route path={`${ROUTES.MOVIE_DETAILS}/:id`} element={<MovieDetails />} />
                 <Route path={`${ROUTES.SHOWTME}/:id`} element={<Showtime />} />
                 <Route path={`${ROUTES.SEAT_BOOKING}/:showTimeId`} element={<SeatBooking />} />

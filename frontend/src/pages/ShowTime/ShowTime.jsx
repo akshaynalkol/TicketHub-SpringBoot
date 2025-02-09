@@ -7,6 +7,14 @@ const Showtime = () => {
     const { id } = useParams();
     const [showtimes, setShowtimes] = useState([]);
 
+    const formatTime = (timeString) => {
+        const [hours, minutes, seconds] = timeString.split(":");
+        const date = new Date();
+        date.setHours(hours, minutes, seconds); 
+    
+        return date.toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit", hour12: true });
+    };
+
     useEffect(() => {
         axios.get(`http://localhost:8080/showtimes/movie/${id}`)
             .then(response => setShowtimes(response.data))
@@ -14,8 +22,8 @@ const Showtime = () => {
     }, [id]);
 
     return (
-        <div className="container">
-            <h2 className="fw-bold text-center py-5">Showtimes for Movie : {showtimes[0]?.movie?.title}</h2>
+        <div className="container py-5">
+            <h2 className="fw-bold text-center pb-5">Showtimes for Movie : {showtimes[0]?.movie?.title}</h2>
             <table className="table table-hovered table-stripped text-center">
                 {/* <thead>
                     <tr>
@@ -33,7 +41,9 @@ const Showtime = () => {
                             <td>{show.date}</td>
                             <td>₹{show.amount}</td>
                             <td>
-                                <NavLink to={`${ROUTES.SEAT_BOOKING}/${show.id}`} className="btn btn-danger px-4">{show.time}</NavLink>
+                                <NavLink to={`${ROUTES.SEAT_BOOKING}/${show.id}`} className="btn btn-danger px-4">
+                                    {formatTime(show.time)}
+                                </NavLink>
                             </td>
                         </tr>
                     ))}

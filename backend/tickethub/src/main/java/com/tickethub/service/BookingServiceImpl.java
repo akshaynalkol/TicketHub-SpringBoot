@@ -27,10 +27,10 @@ public class BookingServiceImpl implements BookingService {
 	@Autowired
 	private ShowtimeRepository showtimeRepository;
 	@Autowired
-	private BookingRepository bookingRepository;    
+	private BookingRepository bookingRepository;
 	@Autowired
 	private BookedSeatRepository bookedSeatRepository;
-	@Autowired     
+	@Autowired
 	private ModelMapper modelMapper;
 
 	public Booking createBooking(BookingDTO bookingRequest) {
@@ -61,13 +61,13 @@ public class BookingServiceImpl implements BookingService {
 
 		return savedBooking;
 	}
-	
+
 	@Override
 	public List<BookingResponseDTO> getAllBookings() {
-		return bookingRepository.findAll().stream()      
-				.map(booking -> modelMapper.map(booking, BookingResponseDTO.class)).collect(Collectors.toList());
+		return bookingRepository.findAll().stream().map(booking -> modelMapper.map(booking, BookingResponseDTO.class))
+				.collect(Collectors.toList());
 	}
-	
+
 	@Override
 	public ApiResponse deleteBookingDetails(Long bookingId) {
 		if (bookingRepository.existsById(bookingId)) {
@@ -77,5 +77,15 @@ public class BookingServiceImpl implements BookingService {
 		return new ApiResponse("Invalid Owner Id !!!");
 	}
 
-	
+	@Override
+	public BookingResponseDTO getBookingById(long id) {
+		return bookingRepository.findById(id).map(booking -> modelMapper.map(booking, BookingResponseDTO.class))
+				.orElse(null);
+	}
+
+	public List<BookingResponseDTO> getBookingsByUser(Long userId) {
+		return bookingRepository.findByUserId(userId).stream().map(booking -> modelMapper.map(booking, BookingResponseDTO.class))
+				.collect(Collectors.toList());
+	}
+
 }

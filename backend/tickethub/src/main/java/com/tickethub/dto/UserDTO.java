@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.tickethub.entities.Gender;
 import com.tickethub.entities.MaritalStatus;
+import com.tickethub.entities.Role;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -20,6 +21,7 @@ public class UserDTO extends BaseDTO {
 	private LocalDate dob;
 	private Gender gender;
 	private MaritalStatus maritalStatus;
+	private Role role;
 	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)   
 	private String password;
 }

@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import './SeatBooking.css';
 import TermsAndConditionsModel from "../../components/TermsAndConditionsModel";
+import { getBookedSeatByShowtime } from "../../services/BookedSeatService";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import axios from "axios";
+import './SeatBooking.css';
 
 export default function SeatBooking() {
     const { showTimeId } = useParams();
@@ -82,6 +83,29 @@ export default function SeatBooking() {
         }
     };
 
+    const fetchBookedSeat = async () => {
+        let res = await getBookedSeatByShowtime(showTimeId);
+        // console.log(res);
+
+        const bookedSeats = res.data; // Extract the data
+
+        const newSeats = [...seats]; // Copy existing seat layout
+
+        bookedSeats.forEach(seat => {
+            const row = rowLabels.indexOf(seat.seatNo[0]); // Extract row letter
+            const col = parseInt(seat.seatNo.slice(1), 10) - 1; // Extract seat number
+            if (row >= 0 && col >= 0) {
+                newSeats[row][col] = "booked"; // Mark the seat as booked
+            }
+        });    
+
+        setSeats(newSeats); // Update the state
+    }
+
+    useEffect(() => {
+        fetchBookedSeat();
+    }, []);
+
     return (
         <>
             <div className="container">
@@ -132,7 +156,7 @@ export default function SeatBooking() {
                     </button>
                 </div>
             </div>
-            <TermsAndConditionsModel bookingId={bookingId} />  
+            <TermsAndConditionsModel bookingId={bookingId} />
         </>
     );
 };

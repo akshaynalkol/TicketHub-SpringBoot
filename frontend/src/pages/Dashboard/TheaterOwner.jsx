@@ -73,8 +73,10 @@ const TheaterOwnerDashboard = () => {
 
     // Logout Function
     const handleLogout = () => {
-        sessionStorage.removeItem('theater_owner_details');
-        toast.success("Theater Owner Logged Out Successfully!");
+        sessionStorage.removeItem('user_details');
+        setUser(null);
+        // console.log(sessionStorage.getItem('user_details'));
+        toast.success("TheaterOwner Logout Successfully!!");
         navigate('/');
     };
 

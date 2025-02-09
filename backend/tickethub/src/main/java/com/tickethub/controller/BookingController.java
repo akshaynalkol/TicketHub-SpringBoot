@@ -48,4 +48,15 @@ public class BookingController {
 
 		return ResponseEntity.ok(bookingService.deleteBookingDetails(bookingId));
 	}
+
+	@GetMapping("/{id}")
+	public BookingResponseDTO getTheaterOwnerById(@PathVariable long id) {
+		return bookingService.getBookingById(id);   
+	}
+
+	@GetMapping("/user/{userId}")
+	public ResponseEntity<List<BookingResponseDTO>> getBookingsByUser(@PathVariable Long userId) {
+		List<BookingResponseDTO> bookings = bookingService.getBookingsByUser(userId);  
+		return ResponseEntity.ok(bookings);    
+	}
 }

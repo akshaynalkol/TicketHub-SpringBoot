@@ -4,11 +4,12 @@ import RazorpayButton from "./RazorpayButton"; // Import RazorpayButton
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
+import { getBookingById } from "../../services/BookingService";
 
 export default function Payment() {
     const { bookingId } = useParams();
     const navigate = useNavigate();
-    const [total, setTotal] = useState(150);
+    const [total, setTotal] = useState(0);
     // const [bookingId, setBookingId] = useState(bookingId); // Dummy booking ID, replace with actual one
     const [user, setUser] = useState(() => {
         const storedUser = sessionStorage.getItem('user_details');
@@ -16,7 +17,7 @@ export default function Payment() {
     });
 
     const updateTotal = (amount) => {
-        setTotal(total + amount);
+        setTotal((prev) => prev + amount);
     };
 
     const handlePayment = async () => {
@@ -86,6 +87,17 @@ export default function Payment() {
             }, 100);
         }
     }, [navigate, user]);
+
+    const fetchBooking = async () => {
+        let res = await getBookingById(bookingId);
+        // console.log(res);
+
+        setTotal(res?.data?.showtime?.amount);
+    }
+
+    useEffect(() => {
+        fetchBooking();
+    }, []);
 
     return (
         <div className="container py-5">
