@@ -25,8 +25,8 @@ public class TheaterOwner extends BaseEntity {
 	@Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "contact_info", nullable = false, unique = true)
-    private String contactInfo;
+    @Column(name = "email", nullable = false, unique = true)
+    private String email;
     
     @Enumerated(EnumType.STRING)
 	private Role role=Role.THEATER_OWNER;

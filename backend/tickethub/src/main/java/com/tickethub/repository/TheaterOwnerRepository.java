@@ -8,5 +8,5 @@ import com.tickethub.entities.TheaterOwner;
 import com.tickethub.entities.User;
 
 public interface TheaterOwnerRepository extends JpaRepository<TheaterOwner, Long> {
-	Optional<TheaterOwner> findByContactInfoAndPassword(String em, String pwd);
+	Optional<TheaterOwner> findByEmailAndPassword(String em, String pwd);
 }

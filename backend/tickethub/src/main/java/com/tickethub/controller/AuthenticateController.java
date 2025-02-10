@@ -53,7 +53,7 @@ public class AuthenticateController {
 	    try {
 	        TheaterOwnerDTO owner = theaterOwnerService.authenticateOwner(loginRequest);
 	        if (owner != null) {
-	            otpService.sendOTP(owner.getContactInfo());
+	            otpService.sendOTP(owner.getEmail());
 	            return ResponseEntity.ok(new ApiResponse("OTP sent to your email.", owner));
 	        }
 	    } catch (ResourceNotFoundException e) {

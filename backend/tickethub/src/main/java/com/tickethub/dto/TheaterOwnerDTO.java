@@ -17,7 +17,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class TheaterOwnerDTO extends BaseDTO {
 	private String name;
-	private String contactInfo;
+	private String email;
 	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 	private String password;
 	private List<TheaterDTO> theaters = new ArrayList<>();;

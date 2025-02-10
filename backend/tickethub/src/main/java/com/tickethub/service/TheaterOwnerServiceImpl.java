@@ -27,7 +27,7 @@ public class TheaterOwnerServiceImpl implements TheaterOwnerService {
 
 	@Override
 	public TheaterOwnerDTO authenticateOwner(LoginRequestDTO dto) {
-		Optional<TheaterOwner> optional = theaterOwnerRepository.findByContactInfoAndPassword(dto.getContactInfo(),
+		Optional<TheaterOwner> optional = theaterOwnerRepository.findByEmailAndPassword(dto.getEmail(),
 				dto.getPassword());
 		TheaterOwner theaterOwner = optional  
 				.orElseThrow(() -> new ResourceNotFoundException("Invalid Email & Password!!"));
