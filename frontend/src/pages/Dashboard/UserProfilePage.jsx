@@ -5,6 +5,7 @@ import profile from '../../assets/profile.png';
 import { updateUser } from '../../services/UserService';
 import { NavLink, useNavigate, useOutletContext } from 'react-router-dom';
 import { getBookingByUser } from '../../services/BookingService';
+import { act } from 'react-dom/test-utils';
 
 const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -65,14 +66,14 @@ const UserProfilePage = () => {
 
     const loadAllBooking = async () => {
         let res = await getBookingByUser(userData.id);
-        // console.log(res);
+        console.log(res);
 
         setBookings(res.data);
     }
 
     useEffect(() => {
         loadAllBooking();
-    }, []);
+    }, [activeTab]);
 
     return (
         <div className="container py-5">
@@ -268,7 +269,7 @@ const UserProfilePage = () => {
                     ) : activeTab === 'myBookings' ? (
                         <div className="bg-white p-4 rounded shadow-sm">
                             {
-                                !bookings ?
+                                bookings.length===0 ?
                                     <>
                                         <h4>No Booking Available</h4>
                                         <p>Movie bookings & food orders will appear here</p>

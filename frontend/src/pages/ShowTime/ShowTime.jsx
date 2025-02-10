@@ -21,6 +21,8 @@ const Showtime = () => {
             .catch(error => console.error("Error fetching showtimes:", error));
     }, [id]);
 
+    // console.log(showtimes);
+
     return (
         <div className="container py-5">
             <h2 className="fw-bold text-center pb-5">Showtimes for Movie : {showtimes[0]?.movie?.title}</h2>

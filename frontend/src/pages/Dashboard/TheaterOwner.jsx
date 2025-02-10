@@ -7,6 +7,11 @@ import { Chart as ChartJS, BarElement, CategoryScale, LinearScale, Tooltip, Lege
 import { getTheaterOwnerById } from '../../services/TheaterOwnerService';
 
 const TheaterOwnerDashboard = () => {
+    const [user, setUser] = useState(() => {
+        const storedUser = sessionStorage.getItem('user_details');
+        return storedUser ? JSON.parse(storedUser) : null;
+    });
+
     const navigate = useNavigate();
     const [activeTab, setActiveTab] = useState('theaterInfo');
     const [theaterOwners, setTheaterOwners] = useState([]);
@@ -78,6 +83,7 @@ const TheaterOwnerDashboard = () => {
         // console.log(sessionStorage.getItem('user_details'));
         toast.success("TheaterOwner Logout Successfully!!");
         navigate('/');
+        window.location.reload();
     };
 
     // Register Chart.js components
@@ -96,13 +102,15 @@ const TheaterOwnerDashboard = () => {
         ],
     };
 
+    // console.log(user);
+
     return (
         <div className="container pt-4">
             <div className="bg-light p-4 mb-3 d-flex align-items-center">
                 <img src={profile} alt="Theater Owner" className="rounded-circle" style={{ width: '100px', height: '100px' }} />
                 <div className="ms-3">
                     <h4 className="fw-bold">Theater Owner Panel</h4>
-                    <p className="mb-0">owner@tickethub.com</p>
+                    <p className="mb-0">{user?.name}</p>
                 </div>
             </div>
 
@@ -136,7 +144,7 @@ const TheaterOwnerDashboard = () => {
                             <p><strong>Name:</strong> {theaterOwners?.name}</p>
                             <p><strong>Theaters:</strong> {theaterOwners?.theaters?.map(val => val.name).join()}</p>
                             <p><strong>Location:</strong> {theaterOwners?.theaters?.map(val => val.location).join()}</p>
-                            <p><strong>Contact Info:</strong> {theaterOwners?.contactInfo}</p>
+                            <p><strong>Contact Info:</strong> {theaterOwners?.email}</p>
                         </div>
                     )}
 

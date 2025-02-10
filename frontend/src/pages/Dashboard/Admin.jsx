@@ -331,9 +331,9 @@ const AdminDashboard = () => {
                       <td>{user.phone}</td>
                       <td>{user.gender}</td>
                       <td>
-                        <button className="btn btn-primary btn-sm me-2" onClick={() => editUser(user)}>
+                        {/* <button className="btn btn-primary btn-sm me-2" onClick={() => editUser(user)}>
                           Edit
-                        </button>
+                        </button> */}
                         <button className="btn btn-danger btn-sm" onClick={() => deleteUsers(user.id)}>
                           Delete
                         </button>
@@ -397,7 +397,7 @@ const AdminDashboard = () => {
                   {theaterOwners.map((owner) => (
                     <tr key={owner.id}>
                       <td>{owner.name}</td>
-                      <td>{owner.contactInfo}</td>
+                      <td>{owner.email}</td>
                       <td>{owner.theaters.map(val => val.name).join()}</td>
                       <td>
                         {/* <button className="btn btn-primary btn-sm me-2" onClick={() => editOwner(owner)}>

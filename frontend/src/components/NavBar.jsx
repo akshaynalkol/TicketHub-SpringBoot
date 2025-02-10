@@ -12,8 +12,6 @@ export default function NavBar({ user, setUser }) {
     const [suggestion, setSuggestion] = useState([]);
     const [showSuggestions, setShowSuggestions] = useState(false);
 
-    console.log(user);
-
 
     useEffect(() => {
         if (key.length > 0) {
@@ -24,7 +22,7 @@ export default function NavBar({ user, setUser }) {
     const getSearchSuggestions = async () => {
         const res = await fetch(YOUTUBE_SEARCH_API + key);
         const data = await res.json();
-        console.log(data);
+        // console.log(data);
         setSuggestion(data[1]);
     }
 
@@ -32,10 +30,12 @@ export default function NavBar({ user, setUser }) {
         getSearchSuggestions();
     }, [key]);
 
+    // console.log(user);
+
     return (
         <>
             {
-                ((user && user?.role === "ADMINE") || (user && user?.role === "THEATER_OWNER")) ?
+                (user && (( user?.role === "ADMIN") || ( user?.role === "THEATER_OWNER"))) ?
                     <>
                         {
                             user.role === "ADMIN" ?
@@ -56,6 +56,7 @@ export default function NavBar({ user, setUser }) {
                     </>
                     :
                     <>
+                        {/* <Navigate to="/" /> */}
                         <nav className="navbar navbar-expand-lg navbar-light bg-light sticky-top shadow-lg">
                             <div className="container d-flex flex-column">
                                 <div className='d-flex w-100'>

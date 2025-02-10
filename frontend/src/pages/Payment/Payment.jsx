@@ -44,7 +44,7 @@ export default function Payment() {
                 currency: order.currency,
                 name: "TicketHub",
                 description: "Movie Ticket Payment",
-                order_id: order.id, // Razorpay Order ID from backend
+                order_id: order.id, // Razorpay Order ID from backend   
                 handler: async function (response) {
                     toast.success("Payment Successful!!!");
 
@@ -58,7 +58,7 @@ export default function Payment() {
 
                     // alert("Payment recorded successfully!");
                     // Navigate to Ticket Page after Payment Success
-                    navigate("/ticket", { state: { bookingId: order.id } });
+                    navigate(`/ticket/${bookingId}`);
 
                 },
                 prefill: {
