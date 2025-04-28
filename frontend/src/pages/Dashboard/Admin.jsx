@@ -211,6 +211,11 @@ const AdminDashboard = () => {
     navigate('/');
   };
 
+  if (user == null) {
+    navigate('/');
+    return;
+  }
+
   return (
     <div className="container pt-4">
       {/* Header Section */}

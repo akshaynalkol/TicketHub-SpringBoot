@@ -45,6 +45,7 @@ public class UserServiceImpl implements UserService {
 
 		emailDetails.setAttachment("");
 		// emailDetails.setAttachment("D:/CDAC/TICKETHUB PROJECT/SendEmail/QP-WJP.pdf");
+		emailDetails.setAttachment("F:/Project/Code SpringBoot/backend/TicketHUB_Welcome_Final.pdf");
 
 		emailService.sendMailWithAttachment(emailDetails);
 

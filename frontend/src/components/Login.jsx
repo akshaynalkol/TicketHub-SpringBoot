@@ -27,11 +27,11 @@ export default function Login({ user, setUser }) {
             try {
                 // let res = await signInUser(user);   
 
-                let res=await authenticateService(user);
+                let res = await authenticateService(user);
                 console.log(res);
                 toast.success(res.data.message);
                 setData(res?.data?.user || res?.data?.theaterOwner || res?.data?.admin);
-                reset(); 
+                reset();
                 setStep(2);
                 // closeModel("loginModal");
             } catch (error) {
@@ -41,9 +41,9 @@ export default function Login({ user, setUser }) {
         }
         else {
             console.log(data);
-            let dataa={
-                email:data.email,
-                otp:user.otp
+            let dataa = {
+                email: data.email,
+                otp: user.otp
             }
             try {
                 let res = await verifyOTP(dataa);
@@ -63,6 +63,26 @@ export default function Login({ user, setUser }) {
             }
         }
     }
+
+    const validatePassword = (password) => {
+        if (password.length <6 || password.length > 12) {
+            return "Password must be 6-12 characters long.";
+        }
+        if (!/[A-Z]/.test(password)) {
+            return "Must contain at least one uppercase letter.";
+        }
+        if (!/[a-z]/.test(password)) {
+            return "Must contain at least one lowercase letter.";
+        }
+        if (!/\d/.test(password)) {
+            return "Must contain at least one number.";
+        }
+        if (!/[@$!%*?&]/.test(password)) {
+            return "Must contain at least one special character (@, $, !, %, *, ?, &).";
+        }
+        return true;
+    };
+
 
     // console.log(watch("email")) // watch input value by passing the name of it
 
@@ -96,7 +116,10 @@ export default function Login({ user, setUser }) {
                                                     <input type={showPassword ? 'text' : 'password'} placeholder='Enter password'
                                                         className='form-control border-end-0' id='password'
                                                         onChange={(e) => handleOnChange(e)}
-                                                        {...register("password", { required: true })} />
+                                                        {...register("password", {
+                                                            required: true,
+                                                            validate: validatePassword,
+                                                        })} />
                                                     <span className='input-group-text cursor-pointer bg-transparent border'
                                                         onClick={() => setShowPassword(!showPassword)}>
                                                         {
@@ -104,7 +127,7 @@ export default function Login({ user, setUser }) {
                                                         }
                                                     </span>
                                                 </div>
-                                                {errors.password && <span className='text-danger'>This field is required</span>}
+                                                {errors.password && <span className='text-danger'>{errors.password.message}</span>}
                                                 <button className="btn btn-outline-danger w-100 mt-4">Send OTP</button>
                                             </form>
                                             <p class="small text-center">

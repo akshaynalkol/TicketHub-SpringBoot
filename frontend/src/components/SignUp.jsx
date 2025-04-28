@@ -158,7 +158,7 @@ export default function SignUp() {
                                         </div>
                                         {errors.confirmPassword && <p className='text-danger mb-0'>{errors.confirmPassword.message}</p>}
 
-                                      
+
                                         <button className="btn btn-outline-success w-100 mt-4">Sign Up</button>
                                     </form>
                                 </div>

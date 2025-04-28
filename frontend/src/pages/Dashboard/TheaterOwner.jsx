@@ -104,6 +104,11 @@ const TheaterOwnerDashboard = () => {
 
     // console.log(user);
 
+    if(user==null){
+        navigate('/');
+        return;
+    }
+
     return (
         <div className="container pt-4">
             <div className="bg-light p-4 mb-3 d-flex align-items-center">

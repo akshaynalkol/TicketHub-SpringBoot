@@ -35,7 +35,7 @@ public class User extends BaseEntity {
 	@Enumerated(EnumType.STRING)  
 	private MaritalStatus maritalStatus;     
 	@Column(length = 50)
-	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+//	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 	private String password;
 	
 	@Enumerated(EnumType.STRING)

@@ -5,7 +5,6 @@ import profile from '../../assets/profile.png';
 import { updateUser } from '../../services/UserService';
 import { NavLink, useNavigate, useOutletContext } from 'react-router-dom';
 import { getBookingByUser } from '../../services/BookingService';
-import { act } from 'react-dom/test-utils';
 
 const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -74,6 +73,13 @@ const UserProfilePage = () => {
     useEffect(() => {
         loadAllBooking();
     }, [activeTab]);
+
+    useEffect(()=>{
+        if(JSON.parse(sessionStorage.getItem('user_details'))==null){
+            navigate('/');
+            return;
+        }
+    },[]);
 
     return (
         <div className="container py-5">
